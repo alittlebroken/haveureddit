@@ -1,13 +1,89 @@
-body {
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Graduate&family=Open+Sans:wght@300&display=swap');
+
+/* Default Settings */
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  font-size: 16px;
+  font-family: "Open Sans";
+}
+
+/* Site Layout */
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  width: 100vw;
+  margin: 0 auto;
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  box-shadow: 1px 1px 5px grey;
+  border-bottom: 1px solid grey;
+}
+
+/* Branding */
+.branding {
+  text-align: center;
+  font-family: Graduate;
+  padding: 0.5rem;
+}
+
+.branding h1 {
+  font-size: 2rem;
+}
+
+.brand-left{
+  color: blue;
+}
+
+.brand-right{
+  color: red;
+}
+
+/* Navigation */
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem;
+}
+
+.nav-container a{
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+.nav-container a:hover{
+  color: red;
+}
+
+/* Desktop Media Queries */
+@media only screen and (min-width: 450px) {
+  /* Layout */
+  .container {
+
+  }
+
+  /* header */
+  .header-container {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: space-between;
+  }
+
+  .nav-container {
+    place-items: center;
+  }
+
+  .branding {
+    text-align: left;
+    padding: 1rem;
+  }
 }
