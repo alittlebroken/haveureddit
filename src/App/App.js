@@ -1,7 +1,10 @@
-import Store from './Store.js';
+import React from 'react';
+import Feed from '../Components/Feed/Feed';
 
 function App() {
-  return ();
+  return (
+      <Feed />
+  );
 }
 
 export default App;
