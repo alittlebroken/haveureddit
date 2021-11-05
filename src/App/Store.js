@@ -1,7 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import { feedReducer } from '../Features/Feed/feedSlice';
 
-const Store = configureStore({
-  // testReducer: testReducer
+export const Store = configureStore({
+  reducer: {
+    feed: feedReducer,
+  }
 });
-
-export default Store;
