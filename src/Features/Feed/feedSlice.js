@@ -1,21 +1,32 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // Generate the async thunks for connecting to the Api
-export const loadFeed = createAsyncThunk(
-  'feed/loadFeedData',
+export const loadFeed = createAsyncThunk('feed/loadFeed',
   async (feedName) => {
-    // Store fetch result here
-    let data;
-    // Check if the feedName has been set and if not load a default feed
-    if(feedName == null){
-      data = await fetch(`https://reddit.com/r/popular.json`)
-    }else{
-      data = await fetch(`https://reddit.com/r/${feedName}.json`)
+
+    // Options for the fetch
+    const fetchOptions = {
+      //mode: 'no-cors',
+      redirect: 'follow'
     }
+    // Check if the feedName has been set and if not load a default feed
+    let url;
+    if(feedName === null){
+      url = `https://www.reddit.com/r/popular.json`;
+    } else {
+      url = `https://www.reddit.com/r/${feedName}.json`;
+    };
+
+    // Attempt to get the data
+    const response = await fetch(url, fetchOptions);
+
     // get the JSON from the response data
-    const jsonData = await data.JSON();
+    const jsonData = await response.json();
+
     // Return the posts from the json json
-    return jsonData;
+    // return jsonData.data.children.map(post => post.data);
+    console.log(jsonData.data.children)
+    return jsonData.data.children.map(post => post.data);
   }
 );
 
@@ -24,11 +35,12 @@ const feedOptions = {
   name: 'feed',
   initialState: {
     posts: [],
-    name: '',
+    name: 'popular',
     before: null,
     after: null,
     isLoading: false,
     hasError: false,
+    errMsg: '',
   },
   reducers: {
     setFeedName: (state, action) => {
@@ -43,12 +55,13 @@ const feedOptions = {
     [loadFeed.rejected]: (state, action) => {
       state.isLoading = false;
       state.hasError = true;
+      state.errMsg = action.error.message;
     },
     [loadFeed.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.hasError = false;
       // Populate the feed data
-      state.posts = action.payload.data.children;
+      state.posts = action.payload;
       state.before = action.payload.before;
       state.after = action.payload.after;
     }
@@ -60,7 +73,11 @@ const feedOptions = {
 const feedSlice = createSlice(feedOptions);
 
 // Create some selectors
-export const selectFeedPosts = state => state.posts;
+export const selectFeedPosts = state => state.feed.posts;
+export const selectHasError = state => state.feed.hasError;
+export const selectIsLoaded = state => state.feed.isLoading;
+export const selectErrorMessage = state => state.feed.errMsg;
+export const selectFeedName = state => state.feed.name;
 
 // Export the slice reducer and actions
 export const { setFeedName } = feedSlice.actions;
