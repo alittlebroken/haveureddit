@@ -25,6 +25,7 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
 
     // Return the posts from the json json
     // return jsonData.data.children.map(post => post.data);
+    console.log(jsonData)
     console.log(jsonData.data.children)
     return jsonData.data.children.map(post => post.data);
   }
@@ -78,6 +79,8 @@ export const selectHasError = state => state.feed.hasError;
 export const selectIsLoaded = state => state.feed.isLoading;
 export const selectErrorMessage = state => state.feed.errMsg;
 export const selectFeedName = state => state.feed.name;
+export const selectBefore = state => state.feed.before;
+export const selectAfter = state => state.feed.after;
 
 // Export the slice reducer and actions
 export const { setFeedName } = feedSlice.actions;
