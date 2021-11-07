@@ -65,6 +65,62 @@
   color: red;
 }
 
+/* Feed List */
+.feed-container{
+  display: grid;
+  grid-template-columns: repeat( 1, 1fr);
+  grid-template-rows: auto;
+}
+
+/* SubReddit Information */
+.subRedditInfo {
+  width: 95%;
+  margin: 10px auto;
+}
+
+/* Post Card */
+.post-card {
+  display: grid;
+  width: 95%;
+  margin: 1px auto;
+  border: 1px solid #F1F3F4;
+  border-radius: 7px;
+}
+
+.post-card div {
+  padding: 0.5rem;
+}
+
+.post-preview-data {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto;
+}
+
+.post-info {
+  display: flex;
+}
+
+.post-center-media {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.post-author,
+.post-subreddit,
+.post-comment-count {
+  font-size: 0.8rem;
+}
+
+.button-link {
+  padding: 0.2rem;
+  border: 0;
+  background-color: transparent;
+  text-decoration: underline;
+  color: blue;
+}
+
 /* Desktop Media Queries */
 @media only screen and (min-width: 450px) {
   /* Layout */
@@ -86,4 +142,5 @@
     text-align: left;
     padding: 1rem;
   }
+
 }
