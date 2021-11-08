@@ -11,7 +11,8 @@ import {
   selectErrorMessage,
   selectFeedName,
   selectLimit,
-  selectPageNum } from '../../Features/Feed/feedSlice.js';
+  selectPageNum,
+  selectSortType } from '../../Features/Feed/feedSlice.js';
 
 // Import the Post Component
 import PostPreview  from '../Post/PostPreview';
@@ -24,6 +25,7 @@ const Feed = () => {
   const subRedditName = useSelector(selectFeedName);
   const limitCount = useSelector(selectLimit);
   const pageNumber = useSelector(selectPageNum);
+  const sortType = useSelector(selectSortType);
 
   // rename the dispatch function
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ const Feed = () => {
   // Load the feed data
   useEffect(() =>{
       dispatch(loadFeed(''))
-  },[dispatch, subRedditName, limitCount, pageNumber]);
+  },[dispatch, subRedditName, limitCount, pageNumber, sortType]);
 
   const feedData = useSelector(selectFeedPosts);
   const errors = useSelector(selectHasError);
