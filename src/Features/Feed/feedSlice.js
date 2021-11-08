@@ -27,7 +27,8 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
     // return jsonData.data.children.map(post => post.data);
     console.log(jsonData)
     console.log(jsonData.data.children)
-    return jsonData.data.children.map(post => post.data);
+    //return jsonData.data.children.map(post => post.data);
+    return jsonData.data;
   }
 );
 
@@ -62,7 +63,7 @@ const feedOptions = {
       state.isLoading = false;
       state.hasError = false;
       // Populate the feed data
-      state.posts = action.payload;
+      state.posts = action.payload.children.map(post => post.data);
       state.before = action.payload.before;
       state.after = action.payload.after;
     }
