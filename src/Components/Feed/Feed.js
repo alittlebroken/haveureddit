@@ -13,18 +13,18 @@ import {
 
 // Import the Post Component
 import  PostPreview  from '../Post/PostPreview';
+import FeedPagination from './FeedPagination';
 
 // The main feed component
 const Feed = () => {
   // Get the feed name
   const subRedditName = useSelector(selectFeedName);
-  console.log(`SubReddit Name: ${subRedditName}`)
   // rename the dispatch function
   const dispatch = useDispatch();
 
   // Load the feed data
   useEffect(() =>{
-      dispatch(loadFeed(subRedditName))
+      dispatch(loadFeed({ feedName: subRedditName }))
   },[dispatch, subRedditName]);
 
   const feedData = useSelector(selectFeedPosts);
@@ -51,6 +51,9 @@ const Feed = () => {
     <div>{feedData.map((post, index) => (
       <PostPreview key={post.id} post={post} />
     ))}
+    </div>
+    <div>
+      <FeedPagination />
     </div>
     </div>;
   }
