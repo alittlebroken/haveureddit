@@ -1,24 +1,41 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+
 // Generate the async thunks for connecting to the Api
 export const loadFeed = createAsyncThunk('feed/loadFeed',
   async (options) => {
 
     // Gte the data from the passed in object
-    const { feedName } = options;
+    const { feedName, before, after, pageAction, pageNum } = options;
 
     // Options for the fetch
     const fetchOptions = {
       //mode: 'no-cors',
       redirect: 'follow'
     }
-    // Check if the feedName has been set and if not load a default feed
-    let url;
-    if(feedName === null){
-      url = `https://www.reddit.com/r/popular.json`;
-    } else {
-      url = `https://www.reddit.com/r/${feedName}.json`;
-    };
+
+    // Set the count of posts seen already for pagination
+    const count = pageNum * 5;
+
+    // Build the url for the correct API
+    let url =`https://www.reddit.com/r/${feedName}.json?limit=5&count=${count}`;
+
+    // Check if we have been asked to paginate at all
+    if(pageAction){
+        console.log(`We have been asked to paginate`)
+        if(before && pageAction === 'prev'){
+          console.log(`going back`)
+          url = `${url}&before=${before}`
+        }
+
+        if(after && pageAction === 'next'){
+          console.log(`going forward`)
+          url = `${url}&after=${after}`
+        }
+
+    }
+
+    console.log(`URL: ${url}`)
 
     // Attempt to get the data
     const response = await fetch(url, fetchOptions);
@@ -29,7 +46,6 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
     // Return the posts from the json json
     // return jsonData.data.children.map(post => post.data);
     console.log(jsonData)
-    console.log(jsonData.data.children)
     //return jsonData.data.children.map(post => post.data);
     return jsonData.data;
   }
@@ -41,6 +57,7 @@ const feedOptions = {
   initialState: {
     posts: [],
     name: 'popular',
+    page: 1,
     before: null,
     after: null,
     isLoading: false,
@@ -50,6 +67,12 @@ const feedOptions = {
   reducers: {
     setFeedName: (state, action) => {
       state.name = action.payload;
+    },
+    incrementPage: (state) => {
+      state.page = state.page + 1;
+    },
+    decrementPage: (state) => {
+      state.page = state.page - 1;
     }
   },
   extraReducers: {
@@ -85,7 +108,8 @@ export const selectErrorMessage = state => state.feed.errMsg;
 export const selectFeedName = state => state.feed.name;
 export const selectBefore = state => state.feed.before;
 export const selectAfter = state => state.feed.after;
+export const selectPageNum = state => state.feed.page;
 
 // Export the slice reducer and actions
-export const { setFeedName } = feedSlice.actions;
+export const { setFeedName, incrementPage, decrementPage } = feedSlice.actions;
 export const feedReducer = feedSlice.reducer;
