@@ -74,11 +74,16 @@ const feedOptions = {
   },
   reducers: {
     setFeedName: (state, action) => {
-      state.prevFeedName = state.name;
-      state.page = 1;
-      state.name = action.payload;
-      state.before = null;
-      state.after = null;
+      /*
+      Do not change the name if they are the same
+      */
+      if(state.name !== action.payload){
+        state.prevFeedName = state.name;
+        state.page = 1;
+        state.name = action.payload;
+        state.before = null;
+        state.after = null;
+      }
     },
     restoreOldFeedName: (state) => {
       // Only restore if we a previous feed to restore to
