@@ -107,6 +107,16 @@
   box-shadow: none;
 }
 
+/* Feed Naviagtion */
+.feedNavContainer {
+  display: flex;
+  width: 95%;
+  margin: 10px auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 /* SubReddit Information */
 .subRedditInfo {
   width: 95%;
