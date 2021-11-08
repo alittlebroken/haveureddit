@@ -38,7 +38,7 @@ const FeedPagination = () => {
   let nextButton;
 
   // Generate the buttons and check if they need to be disabled or not.
-  if(pageBefore !== null && pageNumber >= 0){
+  if(pageBefore !== null && pageNumber > 1){
     prevButton = <button value="prev" onClick={handlePageButton}>Prev</button>;
   } else {
     prevButton = <button disabled>Prev</button>;
