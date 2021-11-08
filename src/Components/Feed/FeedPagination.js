@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 // Custom component & slices imports
 import {
   /* setFeedName, */
-  loadFeed,
   selectBefore,
   selectAfter,
   selectFeedName,
@@ -18,9 +17,6 @@ const FeedPagination = () => {
 
   const dispatch = useDispatch();
 
-  // Get the subReddit name we are after
-  const subReddit = useSelector(selectFeedName);
-
   // Get selector data for FeedPagination
   const pageBefore = useSelector(selectBefore);
   const pageAfter = useSelector(selectAfter);
@@ -32,22 +28,9 @@ const FeedPagination = () => {
 
     if(pageAction === 'next'){
       dispatch(incrementPage());
-      pageNumber += 1;
     } else if (pageAction === 'prev'){
       dispatch(decrementPage());
-      pageNumber -= 1;
     }
-
-    // Generate the object to pass to the load feed page
-    const options = {
-      feedName: subReddit,
-      before: pageBefore,
-      after: pageAfter,
-      pageAction: pageAction,
-      pageNum: pageNumber
-    }
-
-    dispatch(loadFeed(options));
 
   };
 
