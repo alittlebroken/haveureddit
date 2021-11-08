@@ -28,17 +28,20 @@
   grid-template-rows: auto;
   box-shadow: 1px 1px 5px grey;
   border-bottom: 1px solid grey;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Branding */
 .branding {
   text-align: center;
   font-family: Graduate;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .branding h1 {
   font-size: 2rem;
+  text-align: center;
 }
 
 .brand-left{
@@ -109,11 +112,21 @@
 
 /* Feed Naviagtion */
 .feedNavContainer {
-  display: flex;
+  display: grid;
   width: 95%;
   margin: 10px auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
   justify-content: space-between;
   align-items: center;
+}
+
+.feedNavContainer h2 {
+  padding: 1rem 0;
+}
+
+.feedNav-header {
+  grid-column: 1 / span 3;
 }
 
 

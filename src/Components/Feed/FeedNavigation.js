@@ -43,12 +43,19 @@ const FeedNavigation = () => {
 
   return (
     <div className="feedNavContainer">
-      <div><h2>r/{subReddit}</h2></div>
-      <div><button className="button-link" onClick={handleGoBackClick}>Back</button></div>
-      <div>Show&nbsp;
-        {limitElement}
-        &nbsp;posts per page.
-      </div>
+        <div className="feedNav-header"><h2>r/{subReddit}</h2></div>
+        <div>
+          Hot Top New
+        </div>
+        <div>
+          <button className="button-link" onClick={handleGoBackClick}>
+            Go Back
+          </button>
+        </div>
+        <div>Show&nbsp;
+          {limitElement}
+          &nbsp;posts.
+        </div>
     </div>
   )
 };
