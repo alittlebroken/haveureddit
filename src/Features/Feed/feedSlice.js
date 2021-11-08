@@ -2,7 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // Generate the async thunks for connecting to the Api
 export const loadFeed = createAsyncThunk('feed/loadFeed',
-  async (feedName) => {
+  async (options) => {
+
+    // Gte the data from the passed in object
+    const { feedName } = options;
 
     // Options for the fetch
     const fetchOptions = {
