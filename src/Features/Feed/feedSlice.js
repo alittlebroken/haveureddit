@@ -75,13 +75,19 @@ const feedOptions = {
   reducers: {
     setFeedName: (state, action) => {
       state.prevFeedName = state.name;
+      state.page = 1;
       state.name = action.payload;
+      state.before = null;
+      state.after = null;
     },
     restoreOldFeedName: (state) => {
       // Only restore if we a previous feed to restore to
       if(state.prevFeedName !== ''){
         state.name = state.prevFeedName;
         state.prevFeedName = '';
+        state.page = 1;
+        state.before = null;
+        state.after = null;
       }
     },
     incrementPage: (state) => {
@@ -90,6 +96,12 @@ const feedOptions = {
     },
     decrementPage: (state) => {
       state.page = state.page - 1;
+      /* Avoid a bug with prev button to not go below page 1 and set before state
+       to null */
+      if(state.page < 1){
+        state.page = 1;
+        state.before = null;
+      }
       state.pageAction = 'prev';
     },
     setLimit: (state, action) => {
