@@ -9,16 +9,19 @@ import {
   selectHasError,
   selectIsLoaded,
   selectErrorMessage,
-  selectFeedName } from '../../Features/Feed/feedSlice.js';
+  selectFeedName,
+  selectLimit } from '../../Features/Feed/feedSlice.js';
 
 // Import the Post Component
 import  PostPreview  from '../Post/PostPreview';
 import FeedPagination from './FeedPagination';
+import FeedNavigation from './FeedNavigation';
 
 // The main feed component
 const Feed = () => {
   // Get the feed name
   const subRedditName = useSelector(selectFeedName);
+  const limitCount = useSelector(selectLimit);
 
   // rename the dispatch function
   const dispatch = useDispatch();
@@ -29,7 +32,7 @@ const Feed = () => {
       dispatch(loadFeed({
         feedName: subRedditName,
       }))
-  },[dispatch, subRedditName]);
+  },[dispatch, subRedditName, limitCount]);
 
   const feedData = useSelector(selectFeedPosts);
   const errors = useSelector(selectHasError);
@@ -49,9 +52,7 @@ const Feed = () => {
     renderFeed = <div><h2>Error</h2><p>{errorMessage}</p></div>;
   } else {
     renderFeed = <div>
-    <div className="subRedditInfo">
-      <h2>r/{subRedditName}</h2>
-    </div>
+    <FeedNavigation />
     <div>
       <FeedPagination />
     </div>
