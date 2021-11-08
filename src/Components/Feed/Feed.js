@@ -19,12 +19,16 @@ import FeedPagination from './FeedPagination';
 const Feed = () => {
   // Get the feed name
   const subRedditName = useSelector(selectFeedName);
+
   // rename the dispatch function
   const dispatch = useDispatch();
 
   // Load the feed data
   useEffect(() =>{
-      dispatch(loadFeed({ feedName: subRedditName }))
+
+      dispatch(loadFeed({
+        feedName: subRedditName,
+      }))
   },[dispatch, subRedditName]);
 
   const feedData = useSelector(selectFeedPosts);
@@ -47,6 +51,9 @@ const Feed = () => {
     renderFeed = <div>
     <div className="subRedditInfo">
       <h2>r/{subRedditName}</h2>
+    </div>
+    <div>
+      <FeedPagination />
     </div>
     <div>{feedData.map((post, index) => (
       <PostPreview key={post.id} post={post} />
