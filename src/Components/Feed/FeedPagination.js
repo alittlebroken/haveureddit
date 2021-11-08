@@ -7,7 +7,6 @@ import {
   /* setFeedName, */
   selectBefore,
   selectAfter,
-  selectFeedName,
   incrementPage,
   decrementPage,
   selectPageNum } from '../../Features/Feed/feedSlice.js';
