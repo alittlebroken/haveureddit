@@ -20,13 +20,13 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
     const pageMode = state.feed.pageAction;
     const pageLimit = state.feed.limit;
     const pageNum = state.feed.page;
+    const sortType = state.feed.sort;
 
     // Set the count of posts seen already for pagination
     const count = pageNum * pageLimit;
 
-
     // Build the url for the correct API
-    let url =`https://www.reddit.com/r/${feedName}.json?limit=${pageLimit}&count=${count}`;
+    let url =`https://www.reddit.com/r/${feedName}.json?limit=${pageLimit}&count=${count}&sort=${sortType}`;
 
     // Check if we have been asked to paginate at all
     if(pageMode){
@@ -68,6 +68,7 @@ const feedOptions = {
     before: null,
     after: null,
     pageAction: '',
+    sort: 'top',
     isLoading: false,
     hasError: false,
     errMsg: '',
@@ -112,6 +113,9 @@ const feedOptions = {
     setLimit: (state, action) => {
       state.limit = action.payload;
     },
+    setSortType: (state, action) => {
+      state.sort = action.payload;
+    },
   },
   extraReducers: {
     [loadFeed.pending]: (state, action) => {
@@ -148,7 +152,14 @@ export const selectBefore = state => state.feed.before;
 export const selectAfter = state => state.feed.after;
 export const selectPageNum = state => state.feed.page;
 export const selectLimit = state => state.feed.limit;
+export const selectSortType = state => state.feed.sort;
 
 // Export the slice reducer and actions
-export const { setFeedName, incrementPage, decrementPage, setLimit, restoreOldFeedName } = feedSlice.actions;
+export const {
+  setFeedName,
+  incrementPage,
+  decrementPage,
+  setLimit,
+  restoreOldFeedName,
+  setSortType } = feedSlice.actions;
 export const feedReducer = feedSlice.reducer;
