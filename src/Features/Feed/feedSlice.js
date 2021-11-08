@@ -58,6 +58,7 @@ const feedOptions = {
     posts: [],
     name: 'popular',
     page: 1,
+    limit: 25,
     before: null,
     after: null,
     isLoading: false,
@@ -73,7 +74,10 @@ const feedOptions = {
     },
     decrementPage: (state) => {
       state.page = state.page - 1;
-    }
+    },
+    setLimit: (state, action) => {
+      state.limit = action.payload;
+    },
   },
   extraReducers: {
     [loadFeed.pending]: (state, action) => {
@@ -109,7 +113,8 @@ export const selectFeedName = state => state.feed.name;
 export const selectBefore = state => state.feed.before;
 export const selectAfter = state => state.feed.after;
 export const selectPageNum = state => state.feed.page;
+export const selectLimit = state => state.feed.limit;
 
 // Export the slice reducer and actions
-export const { setFeedName, incrementPage, decrementPage } = feedSlice.actions;
+export const { setFeedName, incrementPage, decrementPage, setLimit } = feedSlice.actions;
 export const feedReducer = feedSlice.reducer;
