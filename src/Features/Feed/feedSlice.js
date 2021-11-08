@@ -62,6 +62,7 @@ const feedOptions = {
   initialState: {
     posts: [],
     name: 'popular',
+    prevFeedName: '',
     page: 1,
     limit: 25,
     before: null,
@@ -73,7 +74,15 @@ const feedOptions = {
   },
   reducers: {
     setFeedName: (state, action) => {
+      state.prevFeedName = state.name;
       state.name = action.payload;
+    },
+    restoreOldFeedName: (state) => {
+      // Only restore if we a previous feed to restore to
+      if(state.prevFeedName !== ''){
+        state.name = state.prevFeedName;
+        state.prevFeedName = '';
+      }
     },
     incrementPage: (state) => {
       state.page = state.page + 1;
@@ -124,5 +133,5 @@ export const selectPageNum = state => state.feed.page;
 export const selectLimit = state => state.feed.limit;
 
 // Export the slice reducer and actions
-export const { setFeedName, incrementPage, decrementPage, setLimit } = feedSlice.actions;
+export const { setFeedName, incrementPage, decrementPage, setLimit, restoreOldFeedName } = feedSlice.actions;
 export const feedReducer = feedSlice.reducer;

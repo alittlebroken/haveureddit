@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   selectFeedName,
   selectLimit,
-  setLimit
+  setLimit,
+  restoreOldFeedName
  } from '../../Features/Feed/feedSlice';
 
 // Main Component
@@ -35,9 +36,15 @@ const FeedNavigation = () => {
     })};
   </select>;
 
+  // Handle clicking the back button for getting out of a subreddit
+  const handleGoBackClick = () => {
+    dispatch(restoreOldFeedName());
+  };
+
   return (
     <div className="feedNavContainer">
       <div><h2>r/{subReddit}</h2></div>
+      <div><button className="button-link" onClick={handleGoBackClick}>Back</button></div>
       <div>Show&nbsp;
         {limitElement}
         &nbsp;posts per page.
