@@ -7,7 +7,8 @@ import {
   selectFeedName,
   selectLimit,
   setLimit,
-  restoreOldFeedName
+  restoreOldFeedName,
+  setSortType,
  } from '../../Features/Feed/feedSlice';
 
 // Main Component
@@ -41,11 +42,24 @@ const FeedNavigation = () => {
     dispatch(restoreOldFeedName());
   };
 
+  // Handler for setting the sort type
+  const handleSetSortType = (event) => {
+    dispatch(setSortType(event.target.value));
+  }
+
   return (
     <div className="feedNavContainer">
         <div className="feedNav-header"><h2>r/{subReddit}</h2></div>
         <div>
-          Hot Top New
+          <button className="button-link" value="hot" onClick={handleSetSortType}>
+            Hot
+          </button>
+          <button className="button-link" value="top" onClick={handleSetSortType}>
+            Top
+          </button>
+          <button className="button-link" value="new" onClick={handleSetSortType}>
+            New
+          </button>
         </div>
         <div>
           <button className="button-link" onClick={handleGoBackClick}>
