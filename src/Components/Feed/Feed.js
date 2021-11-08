@@ -31,7 +31,7 @@ const Feed = () => {
   // Load the feed data
   useEffect(() =>{
       dispatch(loadFeed(''))
-  },[dispatch, subRedditName, limitCount, selectPageNum]);
+  },[dispatch, subRedditName, limitCount, pageNumber]);
 
   const feedData = useSelector(selectFeedPosts);
   const errors = useSelector(selectHasError);
