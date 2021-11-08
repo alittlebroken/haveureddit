@@ -3,7 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // Generate the async thunks for connecting to the Api
 export const loadFeed = createAsyncThunk('feed/loadFeed',
-  async (options) => {
+  async (options, { getState }) => {
+
+    const state = getState();
 
     // Gte the data from the passed in object
     const { feedName, before, after, pageAction, pageNum } = options;
@@ -15,10 +17,10 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
     }
 
     // Set the count of posts seen already for pagination
-    const count = pageNum * 5;
+    const count = pageNum * state.limit;
 
     // Build the url for the correct API
-    let url =`https://www.reddit.com/r/${feedName}.json?limit=5&count=${count}`;
+    let url =`https://www.reddit.com/r/${feedName}.json?limit=${state.limit}&count=${count}`;
 
     // Check if we have been asked to paginate at all
     if(pageAction){
