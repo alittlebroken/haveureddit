@@ -3,12 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // Generate the async thunks for connecting to the Api
 export const loadFeed = createAsyncThunk('feed/loadFeed',
-  async (options, thunkAPI) => {
+  async (junk,thunkAPI) => {
 
     const state = thunkAPI.getState();
-
-    // Gte the data from the passed in object
-    const { feedName, before, after, pageAction, pageNum } = options;
 
     // Options for the fetch
     const fetchOptions = {
@@ -16,20 +13,29 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
       redirect: 'follow'
     }
 
+    // Get the data from state
+    const feedName = state.feed.name;
+    const pageBefore = state.feed.before;
+    const pageAfter = state.feed.after;
+    const pageMode = state.feed.pageAction;
+    const pageLimit = state.feed.limit;
+    const pageNum = state.feed.page;
+
     // Set the count of posts seen already for pagination
-    const count = pageNum * state.feed.limit;
+    const count = pageNum * pageLimit;
+
 
     // Build the url for the correct API
-    let url =`https://www.reddit.com/r/${feedName}.json?limit=${state.feed.limit}&count=${count}`;
+    let url =`https://www.reddit.com/r/${feedName}.json?limit=${pageLimit}&count=${count}`;
 
     // Check if we have been asked to paginate at all
-    if(pageAction){
-        if(before && pageAction === 'prev'){
-          url = `${url}&before=${before}`
+    if(pageMode){
+        if(pageBefore && pageMode === 'prev'){
+          url = `${url}&before=${pageBefore}`
         }
 
-        if(after && pageAction === 'next'){
-          url = `${url}&after=${after}`
+        if(pageAfter && pageMode === 'next'){
+          url = `${url}&after=${pageAfter}`
         }
 
     }
@@ -60,6 +66,7 @@ const feedOptions = {
     limit: 25,
     before: null,
     after: null,
+    pageAction: '',
     isLoading: false,
     hasError: false,
     errMsg: '',
@@ -70,9 +77,11 @@ const feedOptions = {
     },
     incrementPage: (state) => {
       state.page = state.page + 1;
+      state.pageAction = 'next';
     },
     decrementPage: (state) => {
       state.page = state.page - 1;
+      state.pageAction = 'prev';
     },
     setLimit: (state, action) => {
       state.limit = action.payload;

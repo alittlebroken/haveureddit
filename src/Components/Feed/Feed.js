@@ -10,10 +10,11 @@ import {
   selectIsLoaded,
   selectErrorMessage,
   selectFeedName,
-  selectLimit } from '../../Features/Feed/feedSlice.js';
+  selectLimit,
+  selectPageNum } from '../../Features/Feed/feedSlice.js';
 
 // Import the Post Component
-import  PostPreview  from '../Post/PostPreview';
+import PostPreview  from '../Post/PostPreview';
 import FeedPagination from './FeedPagination';
 import FeedNavigation from './FeedNavigation';
 
@@ -22,17 +23,15 @@ const Feed = () => {
   // Get the feed name
   const subRedditName = useSelector(selectFeedName);
   const limitCount = useSelector(selectLimit);
+  const pageNumber = useSelector(selectPageNum);
 
   // rename the dispatch function
   const dispatch = useDispatch();
 
   // Load the feed data
   useEffect(() =>{
-
-      dispatch(loadFeed({
-        feedName: subRedditName,
-      }))
-  },[dispatch, subRedditName, limitCount]);
+      dispatch(loadFeed(''))
+  },[dispatch, subRedditName, limitCount, selectPageNum]);
 
   const feedData = useSelector(selectFeedPosts);
   const errors = useSelector(selectHasError);
