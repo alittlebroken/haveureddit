@@ -184,6 +184,89 @@
   color: blue;
 }
 
+/* loading message styling */
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loadingContent {
+  position: fixed;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Modal styling */
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.Modal-block {
+  display: block;
+}
+
+.Modal-none {
+  display: none;
+}
+
+.ModalContainer {
+  position: fixed;
+  width: 80%;
+  height: auto;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 7px 7px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ModalTitle {
+  padding: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ModalMessage {
+  padding: 1rem;
+}
+
+.ModalFooter {
+  padding: 1rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Modal-info {
+  background-color:  #d5f5e3 ;
+}
+.Modal-error {
+  background-color:  #fadbd8;
+}
+.Modal-warn {
+  background-color: #fcf3cf;
+}
+
+.ModalClose {
+  width: 2rem;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
 /* Desktop Media Queries */
 @media only screen and (min-width: 450px) {
   /* Layout */

@@ -14,10 +14,11 @@ import {
   selectPageNum,
   selectSortType } from '../../Features/Feed/feedSlice.js';
 
-// Import the Post Component
+// Import custom Components
 import PostPreview  from '../Post/PostPreview';
 import FeedPagination from './FeedPagination';
 import FeedNavigation from './FeedNavigation';
+import Modal from '../Modal/Modal';
 
 // The main feed component
 const Feed = () => {
@@ -32,7 +33,7 @@ const Feed = () => {
 
   // Load the feed data
   useEffect(() =>{
-      dispatch(loadFeed(''))
+      dispatch(loadFeed())
   },[dispatch, subRedditName, limitCount, pageNumber, sortType]);
 
   const feedData = useSelector(selectFeedPosts);
@@ -48,9 +49,24 @@ const Feed = () => {
   //
   let renderFeed;
   if(loading){
-    renderFeed = <h2>Loading</h2>;
+
+    renderFeed = <div id="loading" className="loading">
+      <div className="loadingContent">
+        <img 
+        src="/loading.gif"
+        title="loading content"
+        alt="loading content" />
+      </div>
+    </div>;
+
   } else if(errors){
-    renderFeed = <div><h2>Error</h2><p>{errorMessage}</p></div>;
+
+    renderFeed = <Modal
+    title="Error"
+    message={errorMessage}
+    messageType="text"
+    modalType="error" />;
+
   } else {
     renderFeed = <div>
     <FeedNavigation />
