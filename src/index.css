@@ -125,8 +125,13 @@
   padding: 1rem 0;
 }
 
-.feedNav-header {
+.feedNav-header,
+.feedNav-sort {
   grid-column: 1 / span 3;
+}
+
+.feedNav-sort {
+  padding: 0.3rem;
 }
 
 

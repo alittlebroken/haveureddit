@@ -9,6 +9,7 @@ import {
   setLimit,
   restoreOldFeedName,
   setSortType,
+  selectSortType
  } from '../../Features/Feed/feedSlice';
 
 // Main Component
@@ -19,6 +20,7 @@ const FeedNavigation = () => {
   // Gather data from selectors
   const subReddit = useSelector(selectFeedName);
   const limit = useSelector(selectLimit);
+  const sortType = useSelector(selectSortType);
 
   // Update the limit each time a new oe is selected
   const handleLimitChange = (event) => {
@@ -50,6 +52,9 @@ const FeedNavigation = () => {
   return (
     <div className="feedNavContainer">
         <div className="feedNav-header"><h2>r/{subReddit}</h2></div>
+        <div className="feedNav-sort">
+          <h4>sorted by {sortType} posts.</h4>
+        </div>
         <div>
           <button className="button-link" value="hot" onClick={handleSetSortType}>
             Hot

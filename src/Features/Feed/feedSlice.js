@@ -26,7 +26,7 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
     const count = pageNum * pageLimit;
 
     // Build the url for the correct API
-    let url =`https://www.reddit.com/r/${feedName}.json?limit=${pageLimit}&count=${count}&sort=${sortType}`;
+    let url =`https://www.reddit.com/r/${feedName}/${sortType}.json?limit=${pageLimit}&count=${count}`;
 
     // Check if we have been asked to paginate at all
     if(pageMode){
