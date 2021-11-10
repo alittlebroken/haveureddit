@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { showModal, setType, setMessage } from '../Modal/ModalSlice';
 
 // Generate the async thunks for connecting to the Api
 export const loadFeed = createAsyncThunk('feed/loadFeed',
@@ -9,11 +10,10 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
 
     // Options for the fetch
     const fetchOptions = {
-      //mode: 'no-cors',
       redirect: 'follow'
     }
 
-    // Get the data from state
+    // Get the data from the feed state state
     const feedName = state.feed.name;
     const pageBefore = state.feed.before;
     const pageAfter = state.feed.after;

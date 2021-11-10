@@ -14,6 +14,12 @@ import {
   selectPageNum,
   selectSortType } from '../../Features/Feed/feedSlice.js';
 
+import {
+  showModal,
+  setType,
+  setMessage
+} from '../../Features/Modal/ModalSlice.js';
+
 // Import custom Components
 import PostPreview  from '../Post/PostPreview';
 import FeedPagination from './FeedPagination';
@@ -36,6 +42,7 @@ const Feed = () => {
       dispatch(loadFeed())
   },[dispatch, subRedditName, limitCount, pageNumber, sortType]);
 
+  // Get data from the store
   const feedData = useSelector(selectFeedPosts);
   const errors = useSelector(selectHasError);
   const loading = useSelector(selectIsLoaded);
@@ -52,7 +59,7 @@ const Feed = () => {
 
     renderFeed = <div id="loading" className="loading">
       <div className="loadingContent">
-        <img 
+        <img
         src="/loading.gif"
         title="loading content"
         alt="loading content" />
@@ -61,11 +68,15 @@ const Feed = () => {
 
   } else if(errors){
 
-    renderFeed = <Modal
-    title="Error"
-    message={errorMessage}
-    messageType="text"
-    modalType="error" />;
+    dispatch(setMessage({
+      title: 'Error loading feed',
+      content: `Apologies it appears something has gone very very wrong loading the requested subreddit feed. \n\nPlease contact the site administrator.\n\n`
+    }));
+
+    dispatch(setType('error'));
+    dispatch(showModal());
+
+    renderFeed = <Modal />;
 
   } else {
     renderFeed = <div>
@@ -85,6 +96,7 @@ const Feed = () => {
 
   return(
     <section className="feed-container">
+      <Modal />
       {renderFeed}
     </section>
   );
