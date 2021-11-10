@@ -1,69 +1,46 @@
 // Standard library imports
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+// Import the slice selectors and actions
+import {
+  selectShow,
+  selectType,
+  selectMessage,
+  showModal,
+ } from '../../Features/Modal/ModalSlice';
 
 // Main component
 const Modal = (props) => {
 
-  // Handle the close button
-  const handleModalClick = (ModalId) => {
+  const dispatch = useDispatch();
 
+  const ModalType = props.ModalType;
+
+  // Assign data from selectors
+  const showDialog = useSelector(selectShow);
+  const modalContent = useSelector(selectMessage);
+  const modalType = useSelector(selectType);
+
+  // Setup the modal classes
+  const modalClass = showDialog ? "Modal Modal-block" : "Modal Modal-none";
+  const modalTitle = modalType === 'error' ? "ModalTitle ModalError" : "ModalTitle";
+
+  // Handle close button
+  const handleClose = () => {
+    dispatch(showModal());
   };
 
-  // Setup the modal class type
-  let modalTitle;
-  let modalMessage;
-  let modalFooter;
-  if(props.modalType === 'error'){
-
-    modalTitle = <div className="ModalTitle Modal-error">
-      <h2>{props.title}</h2>
-      <button className="ModalClose" onClick="handleModalClick">X</button>
-    </div>;
-
-    modalMessage = <div className="ModalMessage">
-      <p>{props.message}</p>
-    </div>;
-
-    modalFooter = <div className="ModalFooter Modal-error">
-      <p>{props.footer}</p>
-    </div>;
-
-  } else if(props.modalType === 'warn'){
-
-    modalTitle = <div className="ModalTitle Modal-warn">
-      <h2>{props.title}</h2>
-    </div>;
-
-    modalMessage = <div className="ModalMessage">
-      <p>{props.message}</p>
-    </div>;
-
-    modalFooter = <div className="ModalFooter Modal-warn">
-      <p>{props.footer}</p>
-    </div>;
-
-  } else {
-
-    modalTitle = <div className="ModalTitle Modal-info">
-      <h2>{props.title}</h2>
-    </div>;
-
-    modalMessage = <div className="ModalMessage">
-      <p>{props.message}</p>
-    </div>;
-
-    modalFooter = <div className="ModalFooter Modal-info">
-      <p>{props.footer}</p>
-    </div>;
-
-  }
-
   return(
-    <div id={props.id} className="Modal Modal-block">
+    <div className={modalClass}>
       <div className="ModalContainer">
-        {modalTitle}
-        {modalMessage}
-        {modalFooter}
+        <div className={modalTitle}>
+          <span><h2>{modalContent.title}</h2></span>
+          <button className="ModalClose" onClick={handleClose}>
+            &#10005;
+          </button>
+        </div>
+        <div className="ModalMessage"><pre>{modalContent.content}</pre></div>
       </div>
     </div>
   )

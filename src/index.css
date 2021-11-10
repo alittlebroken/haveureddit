@@ -228,37 +228,55 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  border-radius: 10px;
   box-shadow: 7px 7px 8px rgba(0, 0, 0, 0.3);
 }
 
 .ModalTitle {
   padding: 1rem;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
   display: flex;
+  border: 1px solid black;
   justify-content: space-between;
+  align-items: center;
+  background-color: gray;
 }
 
 .ModalMessage {
   padding: 1rem;
+  font-size: 1.5rem;
+  border: 1px solid black;
 }
 
-.ModalFooter {
-  padding: 1rem;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+.ModalMessage pre {
+  font-family: inherit;
+  font-size: 1rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.ModalTitle button {
+  background-color: white;
+  border: 1px solid white;
+}
+
+.ModalClose {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
 }
 
 .Modal-info {
-  background-color:  #d5f5e3 ;
+  background-color:  #d5f5e3;
 }
-.Modal-error {
-  background-color:  #fadbd8;
+
+.ModalError {
+  background-color:  red;
+  color: white;
 }
-.Modal-warn {
-  background-color: #fcf3cf;
-}
+
 
 .ModalClose {
   width: 2rem;
