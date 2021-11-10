@@ -40,7 +40,7 @@ const Feed = () => {
   // Load the feed data
   useEffect(() =>{
       dispatch(loadFeed())
-  },[dispatch, subRedditName, limitCount, pageNumber, sortType]);
+  },[subRedditName, limitCount, pageNumber, sortType]);
 
   // Get data from the store
   const feedData = useSelector(selectFeedPosts);
