@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 
 // Component Imports
 import { setFeedName } from '../../Features/Feed/feedSlice.js';
+import Post from './Post'
+import Toggler from '../Toggler/Toggler';
+import { toggleOnOff } from '../../Features/Toggler/TogglerSlice'
 
 // Slice imports
 
@@ -49,14 +52,37 @@ const PostPreview = (props) => {
 
     // handle click for setting the subreddit name
     const handleSetNameClick = () => {
-      console.log(`SubReddit: ${postSubReddit}`)
-        dispatch(setFeedName(postSubReddit));
+      dispatch(setFeedName(postSubReddit));
+    };
+
+
+    const handleClose = (payload) => {
+      dispatch(toggleOnOff({
+        id: payload.id,
+        state: payload.state,
+      }));
+    };
+
+    const handleOpen = (payload) => {
+      dispatch(toggleOnOff({
+        id: payload.id,
+        state: payload.state,
+      }));
     };
 
   return (
-    <div className="post-card">
-
-      <div className="post-preview-data">
+    <div
+    className="post-card">
+      <Toggler id={props.post.id}>
+        <Post key={props.post.id}
+        content={props.post}
+        onClick={() => {
+          handleClose({id:props.post.id, state: false})
+        }} />
+      </Toggler>
+      <div className="post-preview-data" onClick={() => {
+        handleOpen({id:props.post.id, state: true})
+      }}>
         <div>
           <h4>{postTitle}</h4>
           <span className="post-author">Posted by: {postAuthor}</span>
