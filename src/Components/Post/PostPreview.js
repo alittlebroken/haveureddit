@@ -5,8 +5,12 @@ import { useDispatch } from 'react-redux';
 
 // Component Imports
 import { setFeedName } from '../../Features/Feed/feedSlice.js';
+import Post from './Post'
+import Toggler from '../Toggler/Toggler';
+import { toggleOnOff } from '../../Features/Toggler/TogglerSlice'
 
-// Slice imports
+// Component Stylesheet
+import './postpreview.css';
 
 // Component
 const PostPreview = (props) => {
@@ -37,26 +41,47 @@ const PostPreview = (props) => {
     alt={props.post.title} />;
   }
 
-    // Plain text post
-    // Check if the text post has some text
-    /*
-    if(props.post.selftext){
-      renderMedia = <ReactMarkdown children={props.post.selftext} />;
-    } else {
-      renderMedia = <p></p>;
-    }
-    */
 
     // handle click for setting the subreddit name
     const handleSetNameClick = () => {
-      console.log(`SubReddit: ${postSubReddit}`)
-        dispatch(setFeedName(postSubReddit));
+      dispatch(setFeedName(postSubReddit));
+    };
+
+
+    const handleClose = (payload) => {
+      dispatch(toggleOnOff({
+        id: payload.id,
+        state: payload.state,
+      }));
+      // Enable main page scrolling again
+      let windowOffset = window.scrollY;
+      window.scrollTo(0, parseInt(windowOffset || '0') * -1);
+      document.body.setAttribute('style', '');
+    };
+
+    const handleOpen = (payload) => {
+      dispatch(toggleOnOff({
+        id: payload.id,
+        state: payload.state,
+      }));
+      // disable main page scrolling
+      let windowOffset = window.scrollY;
+      document.body.setAttribute('style', `position: fixed; top: -${windowOffset}px; left: 0; right: 0;`);
     };
 
   return (
+    <div>
+    <Toggler id={props.post.id}>
+      <Post key={props.post.id}
+      content={props.post}
+      onClick={() => {
+        handleClose({id:props.post.id, state: false})
+      }} />
+    </Toggler>
     <div className="post-card">
-
-      <div className="post-preview-data">
+      <div className="post-preview-data" onClick={() => {
+        handleOpen({id:props.post.id, state: true})
+      }}>
         <div>
           <h4>{postTitle}</h4>
           <span className="post-author">Posted by: {postAuthor}</span>
@@ -73,6 +98,7 @@ const PostPreview = (props) => {
           <span className="post-comment-count">Comments: {postComments}</span>
         </div>
       </div>
+    </div>
     </div>
   )
 };

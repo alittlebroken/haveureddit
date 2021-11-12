@@ -11,6 +11,9 @@ import {
   decrementPage,
   selectPageNum } from '../../Features/Feed/feedSlice.js';
 
+// Component Styling
+import './feedpagination.css';
+
 // Main Component
 const FeedPagination = () => {
 

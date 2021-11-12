@@ -1,0 +1,95 @@
+
+.postContainer {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2rem auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  overflow: auto;
+  font-family: inherit;
+}
+
+.postOpen {
+  display: block;
+}
+
+.postClose {
+  display: none;
+}
+
+.postTopBar {
+  display: grid;
+  padding: 0.5rem;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+}
+
+.postTopBar i {
+  color: white;
+}
+
+.postCloseButton {
+  cursor: pointer;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  background-color: white;
+  font-size: 1.2rem;
+}
+
+.postHeaderContainer {
+  border: 3px solid white;
+  border-radius: 10px;
+  margin: 5px;
+  background-color: var(--post-container-color);
+}
+
+.postHeader {
+  display: grid;
+  padding: 0.5rem;
+  grid-template-columns: 2fr 0.5fr;
+  justify-content: space-between;
+  color: var(--post-title-color);
+}
+
+.postInfoTitle {
+  font-size: 0.8rem;
+  padding: 0.5rem;
+}
+
+.postMain {
+  margin-top: 50px;
+}
+
+.postContent {
+  max-width: 100%;
+  padding: 0px;
+}
+
+.postContent pre {
+  font-family: inherit;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.postSubInfo {
+  padding: 0.5rem;
+  margin: 5px;
+  border-radius: 10px;
+  border: 3px solid var(--post-border-color);
+  background-color: var(--post-subinfo-bg);
+}
+
+.postComments {
+  padding: 0.5rem;
+
+}

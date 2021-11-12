@@ -10,6 +10,9 @@ import {
   showModal,
  } from '../../Features/Modal/ModalSlice';
 
+// Component styling
+import './modal.css';
+
 // Main component
 const Modal = (props) => {
 

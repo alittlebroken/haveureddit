@@ -12,6 +12,9 @@ import {
   selectSortType
  } from '../../Features/Feed/feedSlice';
 
+// Component Styling
+import './feednavigation.css';
+
 // Main Component
 const FeedNavigation = () => {
 
