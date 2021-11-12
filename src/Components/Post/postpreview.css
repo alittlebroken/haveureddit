@@ -1,0 +1,38 @@
+/* Post Card */
+.post-card {
+  display: grid;
+  width: 95%;
+  margin: 1px auto;
+  border: 3px solid var(--post-border-color);
+  border-radius: 7px;
+  z-index: 999;
+  margin-bottom: 1rem;
+}
+
+.post-card div {
+  padding: 0.5rem;
+}
+
+.post-preview-data {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto;
+  background-color: #F7F8FC;
+}
+
+.post-info {
+  display: flex;
+  background-color: #D4DAF2;
+}
+
+.post-center-media {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.post-author,
+.post-subreddit,
+.post-comment-count {
+  font-size: 0.8rem;
+}

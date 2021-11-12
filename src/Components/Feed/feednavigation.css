@@ -1,0 +1,31 @@
+/* Feed Naviagtion */
+.feedNavContainer {
+  display: grid;
+  width: 95%;
+  margin: 10px auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedNavContainer h2 {
+  padding: 1rem 0;
+}
+
+.feedNav-header,
+.feedNav-sort {
+  grid-column: 1 / span 3;
+}
+
+.feedNav-sort {
+  padding: 0.3rem;
+}
+
+.button-link {
+  padding: 0.2rem;
+  border: 0;
+  background-color: transparent;
+  text-decoration: underline;
+  color: blue;
+}

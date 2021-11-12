@@ -11,6 +11,16 @@
 :root {
   font-size: 16px;
   font-family: "Open Sans";
+
+  /* site colors */
+  --main-bg-color: #202746;
+  --text-color: #;
+  --post-container-color: #F7F8FC;
+  --post-bg-color: #F2F2E3;
+  --post-border-color: white;
+  --post-title-color: #F78764;
+  --post-data-bg: #F7F8FC;
+  --post-data-border: #D4DAF2;
 }
 
 /* Site Layout */
@@ -20,6 +30,7 @@
   grid-template-rows: auto;
   width: 100vw;
   margin: 0 auto;
+  background-color: var(--main-bg-color);
 }
 
 .header-container {
@@ -50,239 +61,6 @@
 
 .brand-right{
   color: red;
-}
-
-/* Navigation */
-.nav-container {
-  display: flex;
-  justify-content: space-around;
-  padding: 0.5rem;
-}
-
-.nav-container a{
-  font-weight: bolder;
-  text-decoration: none;
-}
-
-.nav-container a:hover{
-  color: red;
-}
-
-/* Feed List */
-.feed-container{
-  display: grid;
-  grid-template-columns: repeat( 1, 1fr);
-  grid-template-rows: auto;
-}
-
-/* Feed Pagination */
-.feedPaginationContainer {
-  display: flex;
-  flex-basis: 45%;
-  width: 95%;
-  margin: 10px auto;
-  justify-content: space-between;
-}
-
-.feedPaginationContainer div {
-  width: 48%;
-}
-.feedPaginationContainer button {
-  padding: 0.5rem;
-  width: 100%;
-  border: 2px solid blue;
-  background-color: white;
-  font-weight: bold;
-  font-size:1.3rem;
-  border-radius: 10px;
-  color: blue;
-}
-
-.feedPaginationContainer button:hover {
-  background-color: blue;
-  color: white;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
-}
-
-.feedPaginationContainer button:disabled {
-  color: gray;
-  background-color: white;
-  box-shadow: none;
-}
-
-/* Feed Naviagtion */
-.feedNavContainer {
-  display: grid;
-  width: 95%;
-  margin: 10px auto;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.feedNavContainer h2 {
-  padding: 1rem 0;
-}
-
-.feedNav-header,
-.feedNav-sort {
-  grid-column: 1 / span 3;
-}
-
-.feedNav-sort {
-  padding: 0.3rem;
-}
-
-
-/* SubReddit Information */
-.subRedditInfo {
-  width: 95%;
-  margin: 10px auto;
-}
-
-/* Post Card */
-.post-card {
-  display: grid;
-  width: 95%;
-  margin: 1px auto;
-  border: 1px solid #F1F3F4;
-  border-radius: 7px;
-}
-
-.post-card div {
-  padding: 0.5rem;
-}
-
-.post-preview-data {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: auto;
-}
-
-.post-info {
-  display: flex;
-}
-
-.post-center-media {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-}
-
-.post-author,
-.post-subreddit,
-.post-comment-count {
-  font-size: 0.8rem;
-}
-
-.button-link {
-  padding: 0.2rem;
-  border: 0;
-  background-color: transparent;
-  text-decoration: underline;
-  color: blue;
-}
-
-/* loading message styling */
-.loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.loadingContent {
-  position: fixed;
-  width: auto;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Modal styling */
-.Modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6);
-}
-
-.Modal-block {
-  display: block;
-}
-
-.Modal-none {
-  display: none;
-}
-
-.ModalContainer {
-  position: fixed;
-  width: 80%;
-  height: auto;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  box-shadow: 7px 7px 8px rgba(0, 0, 0, 0.3);
-}
-
-.ModalTitle {
-  padding: 1rem;
-  display: flex;
-  border: 1px solid black;
-  justify-content: space-between;
-  align-items: center;
-  background-color: gray;
-}
-
-.ModalMessage {
-  padding: 1rem;
-  font-size: 1.5rem;
-  border: 1px solid black;
-}
-
-.ModalMessage pre {
-  font-family: inherit;
-  font-size: 1rem;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-}
-
-.ModalTitle button {
-  background-color: white;
-  border: 1px solid white;
-}
-
-.ModalClose {
-  cursor: pointer;
-  width: 2rem;
-  height: 2rem;
-}
-
-.Modal-info {
-  background-color:  #d5f5e3;
-}
-
-.ModalError {
-  background-color:  red;
-  color: white;
-}
-
-
-.ModalClose {
-  width: 2rem;
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 4px;
 }
 
 /* Desktop Media Queries */
