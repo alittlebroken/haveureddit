@@ -26,6 +26,9 @@ import FeedPagination from './FeedPagination';
 import FeedNavigation from './FeedNavigation';
 import Modal from '../Modal/Modal';
 
+// Component Styling
+import './feed.css';
+
 // The main feed component
 const Feed = () => {
   // Get the feed name
