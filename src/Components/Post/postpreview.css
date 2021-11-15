@@ -39,7 +39,7 @@
 .post-center-media {
   display: grid;
   justify-content: end;
-  align-content: center;
+  align-content: start;
 }
 
 .post-info-image-thumb {
