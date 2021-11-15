@@ -93,9 +93,6 @@ const Post = (props) => {
             title="comments" alt="comments"
             ></i>
             &nbsp;{num_comments}
-            <div className="postComments">
-              Comments Go Here
-            </div>
           </div>
 
         </div>
