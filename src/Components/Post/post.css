@@ -67,9 +67,14 @@
 }
 
 .postContent {
-  max-width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
   padding: 0px;
+  border-radius: 10px;
+}
 
+.postContent img, video {
+  border-radius: 10px;
 }
 
 .postContentText {
