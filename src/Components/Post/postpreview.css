@@ -32,6 +32,10 @@
   color: var(--post-title-color);
 }
 
+.postTitleSpan {
+  grid-column: 1 / spane 2;
+}
+
 .post-center-media {
   display: grid;
   justify-content: end;

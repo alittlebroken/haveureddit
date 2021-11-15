@@ -34,7 +34,7 @@ const PostPreview = (props) => {
 
   let renderMedia;
   if(thumbWidth === null || thumbHeight === null || thumb === 'default'){
-    renderMedia = '';
+    renderMedia = null;
   } else {
     renderMedia = <img
     className="post-info-image-thumb"
@@ -84,12 +84,14 @@ const PostPreview = (props) => {
       }} />
     </Toggler>
     <div className="post-card">
+
       <div className="post-preview-data" onClick={() => {
         handleOpen({id:props.post.id, state: true})
       }}>
-        <div>
 
-          <h4 className="postTitle">{postTitle}</h4>
+        <div className={renderMedia ? "postTitle" : " postTitle postTitleSpan"}>
+
+          <h4>{postTitle}</h4>
 
           <span className="post-author">
           Posted by: {postAuthor}
