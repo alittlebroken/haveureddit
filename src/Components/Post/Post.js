@@ -21,25 +21,41 @@ const Post = (props) => {
     all_awardings
   } = data;
 
+  console.log(`Post Text: ${data.selftext}`)
+
   // get the media from the page
   let media;
   if(data.is_video){
     // Video
     const media_src = data.media.reddit_video.fallback_url;
-    media = <video width="100%" height="80%" controls autoplay muted>
+    media = <div className="postContent">
+    <video width="100%" height="80%" controls autoplay muted>
       <source src={media_src} />
       Your browser does not support the video tag
-    </video>;
+    </video>
+    </div>;
+
   } else if(data.is_self){
-    // Image
-    media = <pre><ReactMarkdown>
+    // Text post
+    media = <div
+    className={data.is_self ? "postContent postContentText": "postContent"}>
+    <pre><ReactMarkdown>
       {data.selftext}
-    </ReactMarkdown></pre>;
+    </ReactMarkdown></pre>
+    </div>;
+
+    // Do not display the element if no text has been entered
+    if(!data.selftext){
+      media = null;
+    }
+
   } else if (!data.is_self && !data.is_video){
     // Check if just an image only
     if(data.media === null && !data.media_embed.length){
       let imgSrc = data.url;
-      media = <img src={imgSrc} width="100%"/>
+      media = <div className="postContent">
+      <img src={imgSrc} width="100%"/>
+      </div>;
     }
   }
 
@@ -83,9 +99,7 @@ const Post = (props) => {
             </div>
           </div>
 
-          <div className="postContent">
-            {media}
-          </div>
+          {media}
 
           <div className="postSubInfo">
             <i
