@@ -60,12 +60,17 @@ const Feed = () => {
   let renderFeed;
   if(loading){
 
-    renderFeed = <div id="loading" className="loading">
+    renderFeed = <div
+    id="loading"
+    className="loading">
       <div className="loadingContent">
         <img
-        src="/loading.gif"
+        src="/loading_001.svg"
         title="loading content"
         alt="loading content" />
+        <h2 className="loadingHeader">
+          Loading please wait...
+        </h2>
       </div>
     </div>;
 
