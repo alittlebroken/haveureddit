@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { showModal, setType, setMessage } from '../Modal/ModalSlice';
-
 // Generate the async thunks for connecting to the Api
 export const loadFeed = createAsyncThunk('feed/loadFeed',
   async (junk,thunkAPI) => {

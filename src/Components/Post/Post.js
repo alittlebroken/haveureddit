@@ -11,14 +11,11 @@ const Post = (props) => {
   // Gather the relevant information from the props
   const data = props.content;
   const {
-    id,
     title,
     author,
     subreddit,
     num_comments,
-    over_18,
-    spoiler,
-    all_awardings
+    over_18
   } = data;
 
   console.log(`Post Text: ${data.selftext}`)
@@ -54,7 +51,7 @@ const Post = (props) => {
     if(data.media === null && !data.media_embed.length){
       let imgSrc = data.url;
       media = <div className="postContent">
-      <img src={imgSrc} width="100%"/>
+        <img src={imgSrc} width="100%" alt={title}/>
       </div>;
     }
   }

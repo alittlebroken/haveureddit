@@ -32,12 +32,18 @@ const FeedNavigation = () => {
   };
 
   const limitValues = [5,15,25,50,100];
-  const limitElement = <select onChange={handleLimitChange}>
+  const limitElement = <select
+  onChange={handleLimitChange}>
     {limitValues.map(limitValue => {
       if(limitValue === limit){
-        return <option value={limitValue} selected>{limitValue}</option>;
+        return <option
+        key={limitValue}
+        value={limitValue}
+        selected>{limitValue}</option>;
       } else {
-        return <option value={limitValue}>{limitValue}</option>;
+        return <option
+        key={limitValue}
+        value={limitValue}>{limitValue}</option>;
       }
     })};
   </select>;
@@ -61,7 +67,9 @@ const FeedNavigation = () => {
             <button
             className="button-link"
             onClick={handleGoBackClick}>
-              <i class="fas fa-angle-double-left"></i>&nbsp;Go Back
+              <i
+              className="fas fa-angle-double-left"></i>
+              &nbsp;Go Back
             </button>
           </div>
         </div>
@@ -77,13 +85,13 @@ const FeedNavigation = () => {
           className="button-link"
           value="top"
           onClick={handleSetSortType}>
-            <i class="far fa-compass"></i>&nbsp;Top
+            <i className="far fa-compass"></i>&nbsp;Top
           </button>
           <button
           className="button-link"
           value="new"
           onClick={handleSetSortType}>
-            <i class="fas fa-air-freshener"></i>&nbsp;New
+            <i className="fas fa-air-freshener"></i>&nbsp;New
           </button>
           <h4>sorted by {sortType}</h4>
         </div>
