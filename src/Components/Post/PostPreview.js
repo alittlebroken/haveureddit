@@ -95,7 +95,14 @@ const PostPreview = (props) => {
           <span className="post-subreddit">From: <button className="button-link" onClick={handleSetNameClick}>r/{postSubReddit}</button></span>
         </div>
         <div>
-          <span className="post-comment-count">Comments: {postComments}</span>
+          <span
+          className="post-comment-count">
+          <i
+          class="far fa-comment"
+          title="comments" alt="comments"
+          ></i>
+          &nbsp;{postComments}
+          </span>
         </div>
       </div>
     </div>
