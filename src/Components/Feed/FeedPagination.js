@@ -43,7 +43,10 @@ const FeedPagination = () => {
   // Generate the buttons and check if they need to be disabled or not.
   if(pageBefore !== null && pageNumber > 1){
     prevButton = <button
+    className="pageButton"
     value="prev"
+    alt="Previous Page Button"
+    title="Previous Page Button"
     onClick={handlePageButton}>
       <i
       className="fas fa-angle-double-left"></i>
@@ -54,6 +57,9 @@ const FeedPagination = () => {
 
   if(pageAfter !== null){
     nextButton = <button
+    className="pageButton"
+    alt="Next Page Button"
+    title="Next Page Button"
     value="next"
     onClick={handlePageButton}>
       <i
