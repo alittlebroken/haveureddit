@@ -30,8 +30,13 @@
 
 .post-center-media {
   display: grid;
-  justify-content: center;
+  justify-content: end;
   align-content: center;
+}
+
+.post-info-image-thumb {
+  width: 90px;
+  border-radius: 10px;
 }
 
 .post-author,
