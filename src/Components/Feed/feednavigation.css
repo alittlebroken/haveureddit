@@ -42,3 +42,9 @@
   margin: 0.3rem;
   background-color: var(--post-container-color);
 }
+
+.button-link:hover {
+  background-color: var(--post-subinfo-bg);
+  color: white;
+  font-wwight: bold;
+}
