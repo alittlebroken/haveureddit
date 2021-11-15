@@ -28,6 +28,10 @@
   align-content: center;
 }
 
+.postTitle {
+  color: var(--post-title-color);
+}
+
 .post-center-media {
   display: grid;
   justify-content: end;

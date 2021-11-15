@@ -89,7 +89,7 @@ const PostPreview = (props) => {
       }}>
         <div>
 
-          <h4>{postTitle}</h4>
+          <h4 className="postTitle">{postTitle}</h4>
 
           <span className="post-author">
           Posted by: {postAuthor}
