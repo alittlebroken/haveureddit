@@ -77,11 +77,11 @@ const Post = (props) => {
       <div className="postContainer">
 
         <div className="postTopBar">
-          <i
-          className="fas fa-arrow-left"
-          onClick={props.onClick}
-          title="back"
-          alt="back"></i>
+            <i
+            className="fas fa-angle-double-left"
+            title="back"
+            onClick={props.onClick}
+            alt="back"></i>
           <p>&nbsp;</p>
         </div>
 
