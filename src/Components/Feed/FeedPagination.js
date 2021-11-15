@@ -42,15 +42,25 @@ const FeedPagination = () => {
 
   // Generate the buttons and check if they need to be disabled or not.
   if(pageBefore !== null && pageNumber > 1){
-    prevButton = <button value="prev" onClick={handlePageButton}>Prev</button>;
+    prevButton = <button
+    value="prev"
+    onClick={handlePageButton}>
+      <i
+      className="fas fa-angle-double-left"></i>
+    </button>;
   } else {
-    prevButton = <button disabled>Prev</button>;
+    prevButton = null;
   }
 
   if(pageAfter !== null){
-    nextButton = <button value="next"  onClick={handlePageButton}>Next</button>;
+    nextButton = <button
+    value="next"
+    onClick={handlePageButton}>
+      <i
+      className="fas fa-angle-double-right"></i>
+    </button>;
   } else {
-    nextButton = <button disabled>Next</button>;
+    nextButton = null;
   }
 
   return (
