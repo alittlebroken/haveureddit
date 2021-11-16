@@ -11,36 +11,96 @@ const Post = (props) => {
   // Gather the relevant information from the props
   const data = props.content;
   const {
-    id,
     title,
     author,
     subreddit,
     num_comments,
-    over_18,
-    spoiler,
-    all_awardings
+    over_18
   } = data;
+
+  // Work out if post is image, video,
+  const videoPost = data.is_video;
+
+  const textPost = data.is_self;
+
+  const galleryPost = data.is_gallery;
+
+  let imagePost = false;
+  if(data.domain === 'i.redd.it' || data.domain === 'i.imgur.com'){
+    imagePost = true;
+  }
+
+
+
+  let externalPost = false;
+  if(data.domain !== 'i.redd.it' || data.domain !== 'v.redd.it' || data.domain !== 'i.imgur.com'|| data.domain !== 'reddit.com'){
+    externalPost = true;
+  }
 
   // get the media from the page
   let media;
-  if(data.is_video){
+  if(videoPost){
     // Video
     const media_src = data.media.reddit_video.fallback_url;
-    media = <video width="100%" height="80%" controls autoplay muted>
+    media = <div className="postContent">
+    <video width="100%" height="80%" controls autoPlay muted>
       <source src={media_src} />
       Your browser does not support the video tag
-    </video>;
-  } else if(data.is_self){
-    // Image
-    media = <pre><ReactMarkdown>
+    </video>
+    </div>;
+
+  } else if(textPost){
+    // Text post
+    media = <div
+    className={data.is_self ? "postContent postContentText": "postContent"}>
+    <pre><ReactMarkdown>
       {data.selftext}
-    </ReactMarkdown></pre>;
-  } else if (!data.is_self && !data.is_video){
-    // Check if just an image only
-    if(data.media === null && !data.media_embed.length){
-      let imgSrc = data.url;
-      media = <img src={imgSrc} width="100%"/>
+    </ReactMarkdown></pre>
+    </div>;
+
+    // Do not display the element if no text has been entered
+    if(!data.selftext){
+      media = null;
     }
+
+  } else if (imagePost){
+
+      let imgSrc = data.url;
+      media = <div className="postContent">
+        <img src={imgSrc} width="100%" alt={title}/>
+      </div>;
+
+  } else if(galleryPost){
+
+    /* Extract the ids and then extract the images associated with those
+     ids */
+    media = data.gallery_data.items.map(item => {
+
+      let id = item.media_id;
+      let imgUrl = data.media_metadata[id].s.u;
+
+      // Extract the image name from the url
+      let imgPattern = /\w*\.\w{3}(?=\?)/g;
+      let imgSrc = imgUrl.match(imgPattern);
+      // Pass in the image name to the reddit image server
+      let finalUrl = `https://i.redd.it/${imgSrc[0]}`;
+
+      return <img
+      src={finalUrl}
+      className="postImgGallery" />
+
+    });
+
+  } else if(externalPost){
+    media = <div className="postExternalLink"><h2>Warning</h2><p>
+    The link below is to an external site of which we have no control over. <br /><br />
+    As such we can not guarantee the content that will greet you once the link
+    has been clicked.<br /><br />
+    Proceed at your own risk.
+    </p>
+    <br />
+    <a href={data.url} target="_blank" rel="noreferrer">Link</a>
+    </div>;
   }
 
   // Do we have a nsfw post?
@@ -61,11 +121,11 @@ const Post = (props) => {
       <div className="postContainer">
 
         <div className="postTopBar">
-          <i
-          className="fas fa-arrow-left"
-          onClick={props.onClick}
-          title="back"
-          alt="back"></i>
+            <i
+            className="fas fa-angle-double-left"
+            title="back"
+            onClick={props.onClick}
+            alt="back"></i>
           <p>&nbsp;</p>
         </div>
 
@@ -83,9 +143,7 @@ const Post = (props) => {
             </div>
           </div>
 
-          <div className="postContent">
-            {media}
-          </div>
+          {media}
 
           <div className="postSubInfo">
             <i
@@ -93,9 +151,6 @@ const Post = (props) => {
             title="comments" alt="comments"
             ></i>
             &nbsp;{num_comments}
-            <div className="postComments">
-              Comments Go Here
-            </div>
           </div>
 
         </div>

@@ -32,12 +32,18 @@ const FeedNavigation = () => {
   };
 
   const limitValues = [5,15,25,50,100];
-  const limitElement = <select onChange={handleLimitChange}>
+  const limitElement = <select
+  onChange={handleLimitChange}>
     {limitValues.map(limitValue => {
       if(limitValue === limit){
-        return <option value={limitValue} selected>{limitValue}</option>;
+        return <option
+        key={limitValue}
+        value={limitValue}
+        selected>{limitValue}</option>;
       } else {
-        return <option value={limitValue}>{limitValue}</option>;
+        return <option
+        key={limitValue}
+        value={limitValue}>{limitValue}</option>;
       }
     })};
   </select>;
@@ -54,26 +60,42 @@ const FeedNavigation = () => {
 
   return (
     <div className="feedNavContainer">
-        <div className="feedNav-header"><h2>r/{subReddit}</h2></div>
+
+        <div className="feedNav-header">
+          <h2>r/{subReddit}</h2>
+          <div>
+            <button
+            className="button-link"
+            onClick={handleGoBackClick}>
+              <i
+              className="fas fa-angle-double-left"></i>
+              &nbsp;Go Back
+            </button>
+          </div>
+        </div>
+
         <div className="feedNav-sort">
-          <h4>sorted by {sortType} posts.</h4>
+          <button
+          className="button-link"
+          value="hot"
+          onClick={handleSetSortType}>
+            <i className="fab fa-hotjar"></i>&nbsp; Hot
+          </button>
+          <button
+          className="button-link"
+          value="top"
+          onClick={handleSetSortType}>
+            <i className="far fa-compass"></i>&nbsp;Top
+          </button>
+          <button
+          className="button-link"
+          value="new"
+          onClick={handleSetSortType}>
+            <i className="fas fa-air-freshener"></i>&nbsp;New
+          </button>
+          <h4>sorted by {sortType}</h4>
         </div>
-        <div>
-          <button className="button-link" value="hot" onClick={handleSetSortType}>
-            Hot
-          </button>
-          <button className="button-link" value="top" onClick={handleSetSortType}>
-            Top
-          </button>
-          <button className="button-link" value="new" onClick={handleSetSortType}>
-            New
-          </button>
-        </div>
-        <div>
-          <button className="button-link" onClick={handleGoBackClick}>
-            Go Back
-          </button>
-        </div>
+
         <div>Show&nbsp;
           {limitElement}
           &nbsp;posts.

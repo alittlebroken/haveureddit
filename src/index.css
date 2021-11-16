@@ -1,5 +1,6 @@
 /* Imports */
 @import url('https://fonts.googleapis.com/css2?family=Graduate&family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,800&display=swap');
 
 /* Default Settings */
 * {
@@ -38,30 +39,25 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
-  box-shadow: 1px 1px 5px grey;
-  border-bottom: 1px solid grey;
-  justify-content: center;
-  align-items: center;
+  background-color: var(--post-subinfo-bg);
+  border: 3px solid var(--post-border-color);
+  border-radius: 10px;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
 /* Branding */
+
 .branding {
-  text-align: center;
-  font-family: Graduate;
+  font-family: "Karla";
   padding: 1rem;
 }
 
 .branding h1 {
   font-size: 2rem;
   text-align: center;
-}
-
-.brand-left{
-  color: blue;
-}
-
-.brand-right{
-  color: red;
+  color: var(--main-bg-color);
 }
 
 /* Desktop Media Queries */

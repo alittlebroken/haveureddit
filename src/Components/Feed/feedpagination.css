@@ -1,7 +1,7 @@
 /* Feed Pagination */
 .feedPaginationContainer {
-  display: flex;
-  flex-basis: 45%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   width: 95%;
   margin: 10px auto;
   justify-content: space-between;
@@ -10,25 +10,35 @@
 .feedPaginationContainer div {
   width: 48%;
 }
-.feedPaginationContainer button {
+
+.pageButton {
   padding: 0.5rem;
-  width: 100%;
-  border: 2px solid blue;
-  background-color: white;
+  width: 50px;
+  height: 50px;
+  border: 3px solid white;
+  background-color: transparent;
   font-weight: bold;
   font-size:1.3rem;
-  border-radius: 10px;
-  color: blue;
-}
-
-.feedPaginationContainer button:hover {
-  background-color: blue;
+  border-radius: 50%;
   color: white;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
 }
 
-.feedPaginationContainer button:disabled {
-  color: gray;
+.pageButton:hover {
   background-color: white;
-  box-shadow: none;
+  color: var(--main-bg-color);
+}
+
+#page-back,
+#page-forward {
+  width: 100%;
+}
+
+#page-back {
+  display: grid;
+  justify-content: start;
+}
+
+#page-forward {
+  display: grid;
+  justify-content: end;
 }

@@ -18,8 +18,6 @@ const Modal = (props) => {
 
   const dispatch = useDispatch();
 
-  const ModalType = props.ModalType;
-
   // Assign data from selectors
   const showDialog = useSelector(selectShow);
   const modalContent = useSelector(selectMessage);

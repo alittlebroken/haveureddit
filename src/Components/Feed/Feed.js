@@ -8,7 +8,6 @@ import {
   selectFeedPosts,
   selectHasError,
   selectIsLoaded,
-  selectErrorMessage,
   selectFeedName,
   selectLimit,
   selectPageNum,
@@ -43,13 +42,12 @@ const Feed = () => {
   // Load the feed data
   useEffect(() =>{
       dispatch(loadFeed())
-  },[subRedditName, limitCount, pageNumber, sortType]);
+  },[dispatch, subRedditName, limitCount, pageNumber, sortType]);
 
   // Get data from the store
   const feedData = useSelector(selectFeedPosts);
   const errors = useSelector(selectHasError);
   const loading = useSelector(selectIsLoaded);
-  const errorMessage = useSelector(selectErrorMessage);
 
   /*
   Future Use for comments
@@ -60,12 +58,17 @@ const Feed = () => {
   let renderFeed;
   if(loading){
 
-    renderFeed = <div id="loading" className="loading">
+    renderFeed = <div
+    id="loading"
+    className="loading">
       <div className="loadingContent">
         <img
-        src="/loading.gif"
+        src="/loading_001.svg"
         title="loading content"
         alt="loading content" />
+        <h2 className="loadingHeader">
+          Loading please wait...
+        </h2>
       </div>
     </div>;
 
