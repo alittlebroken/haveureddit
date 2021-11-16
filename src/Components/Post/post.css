@@ -104,7 +104,29 @@
   background-color: var(--post-subinfo-bg);
 }
 
+.postExternalLink {
+  padding: 0.5rem;
+  width: 95%;
+  border-radius: 10px;
+  margin: 0 auto;
+  border: 3px solid var(--post-border-color);
+  background-color: var(--post-container-color);
+}
+
+.postExternalLink h2 {
+  text-align: center;
+  padding: 1rem;
+  color: red;
+  font-weight: bold;
+}
+
+.postImgGallery {
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
 .postComments {
   padding: 0.5rem;
-
 }
