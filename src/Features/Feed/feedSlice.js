@@ -28,17 +28,17 @@ export const populateFeed = createAsyncThunk('feed/populateFeed',
 
     // search term
     const term = state.feed.searchTerm;
-    console.log(term)
+    const searchPerformed = state.feed.search;
 
     /* We now need to determine if we are perforing a search or just a normal
     subreddits posts */
-    if(term){
-      console.log('SEARCH')
+    if(searchPerformed){
+
       // create the url to pull searches from
       url = `https://api.reddit.com/search.json?q=${term}&limit=${pageLimit}&count=${count}`;
 
     } else {
-      console.log('FEED')
+
       // Lets get some specific data from the store
       const feedName = state.feed.name ? state.feed.name : 'popular';
 
@@ -88,6 +88,7 @@ const feedOptions = {
     hasError: false,
     errMsg: '',
     searchTerm: '',
+    search: false,
   },
   reducers: {
     setFeedName: (state, action) => {
@@ -100,6 +101,7 @@ const feedOptions = {
         state.name = action.payload;
         state.before = null;
         state.after = null;
+        state.search = false;
       }
     },
     restoreOldFeedName: (state) => {
@@ -137,6 +139,7 @@ const feedOptions = {
       state.before = null;
       // clear out any search terms
       state.searchTerm = '';
+      state.search = false;
       // Double check a feed name has been set
       state.name = state.name ? state.name : 'popular';
     },
@@ -151,7 +154,10 @@ const feedOptions = {
       } else {
         state.name = '';
       }
-    }
+    },
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
   },
   extraReducers: {
     [populateFeed.pending]: (state, action) => {
@@ -189,6 +195,7 @@ export const selectPageNum = state => state.feed.page;
 export const selectLimit = state => state.feed.limit;
 export const selectSortType = state => state.feed.sort;
 export const selectSearchTerm = state => state.feed.searchTerm;
+export const selectSearchPerformed = state => state.feed.search;
 
 // Export the slice reducer and actions
 export const {
@@ -198,5 +205,6 @@ export const {
   setLimit,
   restoreOldFeedName,
   setSortType,
-  setSearchTerm } = feedSlice.actions;
+  setSearchTerm,
+  setSearch } = feedSlice.actions;
 export const feedReducer = feedSlice.reducer;
