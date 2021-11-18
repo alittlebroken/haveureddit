@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 // custom package imports
-import { setSearchTerm } from '../../Features/Feed/feedSlice.js';
+import { setSearchTerm, setSearch } from '../../Features/Feed/feedSlice.js';
 
 // Import Styling
 import './searchbar.css';
@@ -16,6 +16,7 @@ const SearchBar = () => {
   // Set the search term when the user click the search button
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(setSearch(true));
     dispatch(setSearchTerm(event.target[0].value));
   };
 
