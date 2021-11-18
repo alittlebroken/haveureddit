@@ -56,11 +56,6 @@ const FeedNavigation = () => {
     </select>
   &nbsp;posts.</div>;
 
-  // Handle clicking the back button for getting out of a subreddit
-  const handleGoBackClick = () => {
-    dispatch(restoreOldFeedName());
-  };
-
   // Handler for setting the sort type
   const handleSetSortType = (event) => {
     dispatch(setSortType(event.target.value));
@@ -83,23 +78,6 @@ const FeedNavigation = () => {
   }  else {
     shownHeader = <div className="feedNavContainer">
 
-      <div className="feedNav-header">
-
-        <h2>r/{subReddit}</h2>
-
-        <div>
-
-        <button
-        className="button-link"
-        onClick={handleGoBackClick}>
-          <i
-          className="fas fa-angle-double-left"></i>
-          &nbsp;Go Back
-        </button>
-
-        </div>
-
-      </div>
 
       <div className="feedNav-sort">
 
