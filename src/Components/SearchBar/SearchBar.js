@@ -16,8 +16,11 @@ const SearchBar = () => {
   // Set the search term when the user click the search button
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(setSearch(true));
-    dispatch(setSearchTerm(event.target[0].value));
+    let term = event.target[0].value;
+    if(term !== '') {
+      dispatch(setSearch(true));
+      dispatch(setSearchTerm(term));
+    }
   };
 
   return(
