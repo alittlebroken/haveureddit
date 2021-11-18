@@ -37,6 +37,7 @@
 .button-link {
   padding: 0.3rem;
   font-size: 0.9rem;
+  font-family: inherit;
   border: 1px solid white;
   border-radius: 5px;
   margin: 0.3rem;
@@ -46,5 +47,5 @@
 .button-link:hover {
   background-color: var(--post-subinfo-bg);
   color: white;
-  font-wwight: bold;
+  font-weight: bold;
 }
