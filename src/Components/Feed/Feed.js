@@ -4,14 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 // Import the actions and selects for this components slice
 import {
   /* setFeedName, */
-  loadFeed,
+  populateFeed,
   selectFeedPosts,
   selectHasError,
   selectIsLoaded,
   selectFeedName,
   selectLimit,
   selectPageNum,
-  selectSortType } from '../../Features/Feed/feedSlice.js';
+  selectSortType,
+  selectSearchTerm } from '../../Features/Feed/feedSlice.js';
 
 import {
   showModal,
@@ -36,13 +37,27 @@ const Feed = () => {
   const pageNumber = useSelector(selectPageNum);
   const sortType = useSelector(selectSortType);
 
+  // Have any search terms been set
+  const searchTerms = useSelector(selectSearchTerm);
+
   // rename the dispatch function
   const dispatch = useDispatch();
 
-  // Load the feed data
-  useEffect(() =>{
+  // Load any data
+  /* useEffect(() =>{
       dispatch(loadFeed())
   },[dispatch, subRedditName, limitCount, pageNumber, sortType]);
+  */
+  useEffect(() =>{
+      dispatch(populateFeed())
+  },[dispatch, subRedditName, limitCount, pageNumber, sortType, searchTerms]);
+
+  // Load any search results
+  /*useEffect(() =>{
+      dispatch(getSearchResults())
+  },[dispatch, searchTerms]);
+  */
+
 
   // Get data from the store
   const feedData = useSelector(selectFeedPosts);
