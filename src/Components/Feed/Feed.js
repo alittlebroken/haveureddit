@@ -12,7 +12,8 @@ import {
   selectLimit,
   selectPageNum,
   selectSortType,
-  selectSearchTerm } from '../../Features/Feed/feedSlice.js';
+  selectSearchTerm,
+ } from '../../Features/Feed/feedSlice.js';
 
 import {
   showModal,
