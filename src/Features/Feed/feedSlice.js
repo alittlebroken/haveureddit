@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// Generate the async thunks for connecting to the Api
-export const loadFeed = createAsyncThunk('feed/loadFeed',
-  async (junk,thunkAPI) => {
+// Populate a feed with posts
+export const populateFeed = createAsyncThunk('feed/populateFeed',
+  async (feedType, thunkAPI) => {
 
+    // Get the store state
     const state = thunkAPI.getState();
 
-    // Options for the fetch
+    // Set any options for the fetch statement
     const fetchOptions = {
-      redirect: 'follow'
-    }
+      redirect: 'follow',
+    };
 
-    // Get the data from the feed state state
-    const feedName = state.feed.name;
+    // Set variables for paging through the records returned
     const pageBefore = state.feed.before;
     const pageAfter = state.feed.after;
     const pageMode = state.feed.pageAction;
@@ -23,34 +23,51 @@ export const loadFeed = createAsyncThunk('feed/loadFeed',
     // Set the count of posts seen already for pagination
     const count = pageNum * pageLimit;
 
-    // Build the url for the correct API
-    let url =`https://www.reddit.com/r/${feedName}/${sortType}.json?limit=${pageLimit}&count=${count}`;
+    // This is used to determine where to fetch the results from
+    let url;
+
+    // search term
+    const term = state.feed.searchTerm;
+    const searchPerformed = state.feed.search;
+
+    /* We now need to determine if we are perforing a search or just a normal
+    subreddits posts */
+    if(searchPerformed){
+
+      // create the url to pull searches from
+      url = `https://api.reddit.com/search.json?q=${term}&limit=${pageLimit}&count=${count}`;
+
+    } else {
+
+      // Lets get some specific data from the store
+      const feedName = state.feed.name ? state.feed.name : 'popular';
+
+      url =`https://www.reddit.com/r/${feedName}/${sortType}.json?limit=${pageLimit}&count=${count}`;
+
+    }
 
     // Check if we have been asked to paginate at all
     if(pageMode){
-        if(pageBefore && pageMode === 'prev'){
-          url = `${url}&before=${pageBefore}`
-        }
+      if(pageBefore && pageMode === 'prev'){
+        url = `${url}&before=${pageBefore}`
+      }
 
-        if(pageAfter && pageMode === 'next'){
-          url = `${url}&after=${pageAfter}`
-        }
-
+      if(pageAfter && pageMode === 'next'){
+        url = `${url}&after=${pageAfter}`
+      }
     }
 
     console.log(`URL: ${url}`)
 
-    // Attempt to get the data
+    /* Now fetch the data from the specified URL and convert to json and then
+    return it */
     const response = await fetch(url, fetchOptions);
-
     // get the JSON from the response data
-    const jsonData = await response.json();
+    const json = await response.json();
 
-    // Return the posts from the json json
-    // return jsonData.data.children.map(post => post.data);
-    console.log(jsonData)
-    //return jsonData.data.children.map(post => post.data);
-    return jsonData.data;
+    console.log(json)
+    return json.data;
+
   }
 );
 
@@ -70,6 +87,8 @@ const feedOptions = {
     isLoading: false,
     hasError: false,
     errMsg: '',
+    searchTerm: '',
+    search: false,
   },
   reducers: {
     setFeedName: (state, action) => {
@@ -82,6 +101,7 @@ const feedOptions = {
         state.name = action.payload;
         state.before = null;
         state.after = null;
+        state.search = false;
       }
     },
     restoreOldFeedName: (state) => {
@@ -113,22 +133,44 @@ const feedOptions = {
     },
     setSortType: (state, action) => {
       state.sort = action.payload;
+      // Set paging info back to 1 to avoid bug
+      state.page = 1;
+      state.after = null;
+      state.before = null;
+      // clear out any search terms
+      state.searchTerm = '';
+      state.search = false;
+      // Double check a feed name has been set
+      state.name = state.name ? state.name : 'popular';
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+      // Set paging info back to 1 to avoid bug
+      state.page = 1;
+      state.after = null;
+      state.before = null;
+      if(action.payload !== null || action.payload !== '' || action.payload !== undefined){
+        state.name = 'popular';
+      } else {
+        state.name = '';
+      }
+    },
+    setSearch: (state, action) => {
+      state.search = action.payload;
     },
   },
   extraReducers: {
-    [loadFeed.pending]: (state, action) => {
+    [populateFeed.pending]: (state, action) => {
       state.isLoading = true;
       state.hasError = false;
     },
-    [loadFeed.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.hasError = true;
-      state.errMsg = action.error.message;
-    },
-    [loadFeed.fulfilled]: (state, action) => {
+    [populateFeed.rejected]: (state, action) => {
       state.isLoading = false;
       state.hasError = false;
-      // Populate the feed data
+    },
+    [populateFeed.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.hasError = false;
       state.posts = action.payload.children.map(post => post.data);
       state.before = action.payload.before;
       state.after = action.payload.after;
@@ -136,6 +178,7 @@ const feedOptions = {
   }
 };
 
+// populateFeed
 
 // Create the feed slice
 const feedSlice = createSlice(feedOptions);
@@ -151,6 +194,8 @@ export const selectAfter = state => state.feed.after;
 export const selectPageNum = state => state.feed.page;
 export const selectLimit = state => state.feed.limit;
 export const selectSortType = state => state.feed.sort;
+export const selectSearchTerm = state => state.feed.searchTerm;
+export const selectSearchPerformed = state => state.feed.search;
 
 // Export the slice reducer and actions
 export const {
@@ -159,5 +204,7 @@ export const {
   decrementPage,
   setLimit,
   restoreOldFeedName,
-  setSortType } = feedSlice.actions;
+  setSortType,
+  setSearchTerm,
+  setSearch } = feedSlice.actions;
 export const feedReducer = feedSlice.reducer;
