@@ -1,0 +1,26 @@
+.subRedditsContainer {
+  display: grid;
+  width: 95%;
+  margin: 0 auto;
+  grid-template-columns: 4fr 1fr;
+}
+
+.selectSubReddits {
+  border: none;
+  padding: 0.4rem;
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1.4rem;
+  background-color: var(--main-bg-color);
+  color: white;
+  font-weight: bold;
+}
+
+.selectSubReddits:hover {
+  border: 3px solid white;
+  background-color: var(--post-data-bg);
+  color: black;
+  font-weight: bold;
+}
