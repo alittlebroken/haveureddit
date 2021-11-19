@@ -17,7 +17,7 @@
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: auto;
-  background-color: #F7F8FC;
+  background-color: var(--post-data-bg);
 }
 
 .post-info {
@@ -33,7 +33,7 @@
 }
 
 .postTitleSpan {
-  grid-column: 1 / spane 2;
+  grid-column: 1 / span 2;
 }
 
 .post-center-media {
