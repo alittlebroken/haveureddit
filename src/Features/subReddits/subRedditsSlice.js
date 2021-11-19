@@ -22,7 +22,7 @@ const options = {
     addSubReddit: (state, action) => {
       state.subreddits.push({
         name: action.payload,
-        sort: 'hot'
+        sort: 'hot',
       });
     }
   },

@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import { setFeedName } from '../../Features/Feed/feedSlice.js';
 import Post from './Post'
 import Toggler from '../Toggler/Toggler';
-import { toggleOnOff } from '../../Features/Toggler/TogglerSlice'
+import { toggleOnOff } from '../../Features/Toggler/TogglerSlice';
+import { addSubReddit } from '../../Features/subReddits/subRedditsSlice';
 
 // Utility components
 import { abbreviateNumber } from '../../utilities.js';
@@ -68,6 +69,11 @@ const PostPreview = (props) => {
       // disable main page scrolling
       let windowOffset = window.scrollY;
       document.body.setAttribute('style', `position: fixed; top: -${windowOffset}px; left: 0; right: 0;`);
+    };
+
+    // Handle clicking on the add button next to the subreddit name button
+    const handleAddSubRedditClick = (payload) => {
+      dispatch(addSubReddit(postSubReddit));
     };
 
     // Format information for numerical data like awards and upvotes
@@ -136,11 +142,20 @@ const PostPreview = (props) => {
       <div className="post-info">
         <div>
           <span className="post-subreddit">
+
             <button
               className="button-link"
-              onClick={handleSetNameClick}>
+              onClick={handleSetNameClick}
+              alt="View subReddit posts"
+              title="View subReddit posts">
               r/{postSubReddit}
             </button>
+
+            <button
+            className="button-link"
+            onClick={handleAddSubRedditClick}
+            alt="Add subreddit to subReddit list"
+            title="Add subreddit to subReddit list">+</button>
           </span>
         </div>
       </div>
