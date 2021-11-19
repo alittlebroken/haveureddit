@@ -20,7 +20,10 @@ const options = {
   },
   reducers: {
     addSubReddit: (state, action) => {
-      state.subreddits.push(action.payload);
+      state.subreddits.push({
+        name: action.payload,
+        sort: 'hot'
+      });
     }
   },
 };
