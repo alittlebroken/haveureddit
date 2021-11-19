@@ -101,18 +101,18 @@ const Feed = () => {
     renderFeed = <Modal />;
 
   } else {
-    renderFeed = <div>
-    <FeedNavigation />
+    renderFeed =
     <div>
+      <FeedNavigation />
       <FeedPagination />
-    </div>
-    <div>{feedData.map((post, index) => (
-      <PostPreview key={post.id} post={post} />
-    ))}
-    </div>
-    <div>
+      <section className="feedList">
+        <div>
+          {feedData.map((post, index) => (
+            <PostPreview key={post.id} post={post} />
+          ))}
+        </div>
+      </section>
       <FeedPagination />
-    </div>
     </div>;
   }
 

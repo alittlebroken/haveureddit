@@ -29,11 +29,23 @@
 .feed-container{
   display: grid;
   grid-template-columns: repeat( 1, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: 4;
 }
 
 .loadingHeader {
   color: white;
   width: 100%;
   text-align: center;
+}
+
+/* Desktop Media Queries */
+@media only screen and (min-width: 450px) {
+
+.feedList {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  justify-content: space-between;
+}
+
 }

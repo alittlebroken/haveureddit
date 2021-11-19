@@ -24,7 +24,7 @@
 .postTopBar {
   display: grid;
   padding: 0.5rem;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
 }
 
@@ -46,7 +46,7 @@
 .postHeaderContainer {
   border: 3px solid white;
   border-radius: 10px;
-  margin: 5px;
+  margin-bottom: 10px;
   background-color: var(--post-container-color);
 }
 
@@ -68,7 +68,7 @@
 }
 
 .postContent {
-  max-width: 95%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0px;
   border-radius: 10px;
@@ -98,15 +98,15 @@
 
 .postSubInfo {
   padding: 0.5rem;
-  margin: 5px;
   border-radius: 10px;
+  margin-top: 10px;
   border: 3px solid var(--post-border-color);
   background-color: var(--post-subinfo-bg);
 }
 
 .postExternalLink {
   padding: 0.5rem;
-  width: 95%;
+  width: 100%;
   border-radius: 10px;
   margin: 0 auto;
   border: 3px solid var(--post-border-color);
@@ -121,7 +121,7 @@
 }
 
 .postImgGallery {
-  width: 90%;
+  width: 100%;
   height: auto;
   border-radius: 10px;
   margin: 0 auto;
@@ -129,4 +129,19 @@
 
 .postComments {
   padding: 0.5rem;
+}
+
+/* Desktop Media Queries */
+@media only screen and (min-width: 450px) {
+
+.postTopBar,
+.postDataContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.postTopBar {
+  width: 100%;
+}
+
 }
