@@ -32,5 +32,5 @@ const subRedditsSlice = createSlice(options);
 export const selectSubReddits = state => state.subReddits.subreddits;
 
 // export actions and reducer for the slice
-const { addSubReddit } = subRedditsSlice.actions;
+export const { addSubReddit } = subRedditsSlice.actions;
 export const subRedditsReducer = subRedditsSlice.reducer;
