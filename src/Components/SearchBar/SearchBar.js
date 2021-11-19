@@ -35,7 +35,7 @@ const SearchBar = () => {
           className="searchTerm" />
           <button
           type="submit"
-          className="searchButton">Search</button>
+          className="searchButton button-link">Search</button>
       </form>
   )
 };
