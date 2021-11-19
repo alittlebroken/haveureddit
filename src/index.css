@@ -11,7 +11,7 @@
 
 :root {
   font-size: 16px;
-  font-family: "Open Sans";
+  font-family: "Karla";
 
   /* site colors */
   --main-bg-color: #202746;
@@ -25,6 +25,17 @@
   --post-subinfo-bg: #D4DAF2;
 }
 
+body {
+  background-color: var(--main-bg-color);
+}
+
+/* common styles */
+.card {
+  background-color: var(--post-data-bg);
+  border: 3px solid var(--post-border-color);
+  border-radius: 5px;
+}
+
 /* Site Layout */
 .container {
   display: grid;
@@ -32,13 +43,12 @@
   grid-template-rows: auto;
   width: 100vw;
   margin: 0 auto;
-  background-color: var(--main-bg-color);
 }
 
 .header-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1f4, 4fr, 1fr;
   background-color: var(--post-subinfo-bg);
   border: 3px solid var(--post-border-color);
   border-radius: 10px;
@@ -56,7 +66,6 @@
 
 .branding h1 {
   font-size: 2rem;
-  text-align: center;
   color: var(--main-bg-color);
 }
 
@@ -64,12 +73,14 @@
 @media only screen and (min-width: 450px) {
   /* Layout */
   .container {
-
+    grid-template-rows: auto;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   /* header */
   .header-container {
-    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
     align-items: space-between;
   }
 
