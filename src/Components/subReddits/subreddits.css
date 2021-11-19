@@ -19,7 +19,6 @@
 }
 
 .selectSubReddits:hover {
-  border: 3px solid white;
   background-color: var(--post-data-bg);
   color: black;
   font-weight: bold;
