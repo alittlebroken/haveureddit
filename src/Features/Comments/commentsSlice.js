@@ -13,9 +13,6 @@ export const loadComments = createAsyncThunk('comments/loadComments',
     // Generate the url we wish to connect to
     const url = `https://api.reddit.com/r/${name}/comments/${id}.json`;
 
-    console.log(`COMMENTS URL`)
-    console.log(url)
-
     // Set options for the fetch command
     const options = {
       redirect: 'follow',
@@ -26,8 +23,35 @@ export const loadComments = createAsyncThunk('comments/loadComments',
     const json = await response.json();
 
     // Return the json
-    console.log(json[1].data.children)
     return json[1].data;
+
+  }
+);
+
+/* Load comment replies */
+export const loadReplies = createAsyncThunk('comments/loadReplies',
+  async (args, thunkAPI) => {
+
+    /* Get the current state */
+    const state = thunkAPI.getState();
+
+    /* Extract the args we need */
+    const { postId, commentId} = args;
+
+    /* Craft the url to be used */
+    const url = `https://api.reddit.com/comment/{postId}/_/{commentId}.json`;
+
+    /* Set the options for the fetch command */
+    const options = {
+      redirect: 'follow',
+    };
+
+    /* Fetch the data and convert to json */
+    const response = await fetch(url, options);
+    const json = await response.json();
+
+    console.log(json)
+    return json;
 
   }
 );
@@ -38,6 +62,7 @@ const commentsSlice = createSlice({
   initialState: {
     comments: [],
     more: [],
+    replies: {},
     isLoading: false,
     hasError: false,
   },
@@ -60,11 +85,26 @@ const commentsSlice = createSlice({
         return child.data;
       });
     },
+    [loadReplies.pending]: (state, action) => {
+      state.isLoading = true;
+      state.hasError = false;
+    },
+    [loadReplies.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.hasError = true;
+    },
+    [loadReplies.pending]: (state, action) => {
+      state.isLoading = false;
+      state.hasError = false;
+    },
   },
 });
 
 // Create the selectors
 export const selectComments = (state) => state.comments.comments;
+export const selectIsLoading = (state) => state.comments.isLoading;
+export const selectHasError = (state) => state.comments.HasError;
+export const selectReplies = (state) => state.comments.replies;
 
 // Export the reducer and actions
 export const commentsReducer = commentsSlice.reducer;
