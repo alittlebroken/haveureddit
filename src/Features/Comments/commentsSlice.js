@@ -82,6 +82,9 @@ const commentsSlice = createSlice({
       /* Loop through the returned data and add it to either the comments
       array or the more array */
       state.comments = action.payload.children.map((child) => {
+        if(!child.data.subreddit_id){
+          state.more = child.data.children.join(',');
+        }
         return child.data;
       });
     },
