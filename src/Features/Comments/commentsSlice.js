@@ -4,8 +4,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const loadComments = createAsyncThunk('comments/loadComments',
   async (args, thunkAPI) => {
 
-    // gather the state data
-    const state = thunkAPI.getState();
 
     // Extract the arguments passed to the function
     const { name, id } = args;
@@ -31,9 +29,6 @@ export const loadComments = createAsyncThunk('comments/loadComments',
 // Load more comments
 export const loadMoreComments = createAsyncThunk('comments/loadMoreComments',
   async (args, thunkAPI) => {
-
-    // gather the state data
-    const state = thunkAPI.getState();
 
     /*
       Get the passed in args we need
@@ -75,7 +70,6 @@ export const loadMoreComments = createAsyncThunk('comments/loadMoreComments',
         let childs = chunks[i].join();
 
         url = `https://reddit.com/api/morechildren.json?link_id=${parent}&api_type=json&children=${childs}&limit=100`;
-        console.log(url)
 
         /** fetch **/
         response = await fetch(url, options);
@@ -88,12 +82,10 @@ export const loadMoreComments = createAsyncThunk('comments/loadMoreComments',
           if(reply.kind === 't1'){
             allFetchedComments.push(reply)
           }
-
+          return null;
         })
 
       }
-
-      console.log(allFetchedComments)
 
     } else {
       url = `https://reddit.com/api/morechildren.json?link_id=${parent}&api_type=json&children=${children}&limit=100`;
@@ -108,41 +100,13 @@ export const loadMoreComments = createAsyncThunk('comments/loadMoreComments',
 
         if(reply.kind === 't1'){
           allFetchedComments.push(reply)
-          }
-
+        }
+        return null;
         }
       )
     }
 
     return allFetchedComments;
-
-  }
-);
-
-/* Load comment replies */
-export const loadReplies = createAsyncThunk('comments/loadReplies',
-  async (args, thunkAPI) => {
-
-    /* Get the current state */
-    const state = thunkAPI.getState();
-
-    /* Extract the args we need */
-    const { postId, commentId} = args;
-
-    /* Craft the url to be used */
-    const url = `https://api.reddit.com/comment/{postId}/_/{commentId}.json`;
-
-    /* Set the options for the fetch command */
-    const options = {
-      redirect: 'follow',
-    };
-
-    /* Fetch the data and convert to json */
-    const response = await fetch(url, options);
-    const json = await response.json();
-
-    console.log(json)
-    return json;
 
   }
 );
@@ -181,18 +145,6 @@ const commentsSlice = createSlice({
         }
         return child.data;
       });
-    },
-    [loadReplies.pending]: (state, action) => {
-      state.isLoading = true;
-      state.hasError = false;
-    },
-    [loadReplies.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.hasError = true;
-    },
-    [loadReplies.pending]: (state, action) => {
-      state.isLoading = false;
-      state.hasError = false;
     },
     [loadMoreComments.prending]: (state, action) => {
       state.isLoading = true;

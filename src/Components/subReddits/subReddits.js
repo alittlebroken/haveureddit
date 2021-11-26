@@ -20,8 +20,6 @@ const SubReddits = () => {
   const subRedditList = useSelector(selectSubReddits);
   const currentSubReddit = useSelector(selectFeedName);
 
-  console.log(currentSubReddit)
-
   // Handle change of value
   const onChange = (event) => {
     let value = event.target.value;
@@ -42,6 +40,7 @@ const SubReddits = () => {
       value={currentSubReddit} >
         {subRedditList.map( subreddit => {
           return <option
+          key={subreddit.name}
           value={subreddit.name}>
             r/{subreddit.name}
           </option>
