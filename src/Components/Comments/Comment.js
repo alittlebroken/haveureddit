@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { getCommentReplies } from '../../utilities';
+import { nanoid } from 'nanoid';
 
 /* Style imports */
 import './comment.css';
@@ -30,7 +31,9 @@ const Comment = (props) => {
           return null;
         } else {
           return (
-            <article key={child.id} className="card commentCard">
+            <article
+            key={nanoid()}
+            className="card commentCard">
               <span className="commentTitle">{child.author}</span>
               <div className="commentBody">
                 <ReactMarkdown>{child.body}</ReactMarkdown>
@@ -55,13 +58,16 @@ const Comment = (props) => {
   */
   /* Render to the screen */
   return (
-    <article className="card commentCard">
+    <div>
+    <article
+    className="card commentCard">
       <span className="commentTitle">{comment.author}</span>
       <div className="commentBody">
         <ReactMarkdown>{comment.body}</ReactMarkdown>
       </div>
       {commentReplies}
     </article>
+    </div>
   )
 
 };

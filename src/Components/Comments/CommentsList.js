@@ -22,7 +22,7 @@ const CommentsList = (props) => {
 
   /* handle click for loading more comments */
   const handleClickMoreComments = (parent, children) => {
-    
+
     dispatch(loadMoreComments({
       parent: parent,
       children: children,
@@ -36,6 +36,7 @@ const CommentsList = (props) => {
     commentList = comments.map(cmt => {
       if(cmt.count){
         return <button
+        key={cmt.id}
         className="button-link card"
         onClick={ () => { handleClickMoreComments(cmt.parent_id, cmt.children) } }>
           Load More Comments

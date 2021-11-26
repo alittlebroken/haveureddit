@@ -37,18 +37,12 @@ const FeedNavigation = () => {
   const limitValues = [5,15,25,50,100];
   const limitElement = <div>Show&nbsp;
     <select
-    onChange={handleLimitChange}>
+    onChange={handleLimitChange}
+    defaultValue={limit}>
       {limitValues.map(limitValue => {
-        if(limitValue === limit){
-          return <option
-          key={limitValue}
-          value={limitValue}
-          selected>{limitValue}</option>;
-        } else {
           return <option
           key={limitValue}
           value={limitValue}>{limitValue}</option>;
-        }
       })};
     </select>
   &nbsp;posts.</div>;
