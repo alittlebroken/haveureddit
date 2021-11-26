@@ -21,3 +21,29 @@ export function abbreviateNumber(value) {
     }
     return newValue;
 }
+
+
+/*
+  Travels down a comment section and returns that comments replies
+  or returns null
+*/
+
+export function getCommentReplies(comment) {
+  // Check that we have replies
+  if (!comment.replies) return null;
+
+  // Loop through each reply generating an object and sending that
+  let replies = [];
+
+  replies = [...replies,comment.replies.data.children.map(reply => {
+      return {
+      author: reply.data.author,
+      body: reply.data.body,
+      ups: reply.data.ups,
+      replies: getCommentReplies(reply.data),
+    }
+  })];
+
+  return replies;
+
+}

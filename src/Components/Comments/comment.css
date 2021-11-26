@@ -1,0 +1,14 @@
+.commentCard {
+  margin-bottom: 5px;
+  padding: 0.5rem;
+}
+
+.commentTitle {
+  color: var(--post-title-color);
+}
+
+.commentBody {
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+}
