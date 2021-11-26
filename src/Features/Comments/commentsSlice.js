@@ -70,7 +70,6 @@ export const loadMoreComments = createAsyncThunk('comments/loadMoreComments',
         let childs = chunks[i].join();
 
         url = `https://reddit.com/api/morechildren.json?link_id=${parent}&api_type=json&children=${childs}&limit=100`;
-        console.log(url)
 
         /** fetch **/
         response = await fetch(url, options);
@@ -87,8 +86,6 @@ export const loadMoreComments = createAsyncThunk('comments/loadMoreComments',
         })
 
       }
-
-      console.log(allFetchedComments)
 
     } else {
       url = `https://reddit.com/api/morechildren.json?link_id=${parent}&api_type=json&children=${children}&limit=100`;

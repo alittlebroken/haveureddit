@@ -16,13 +16,13 @@ const CommentsList = (props) => {
 
   // Take out the props passed in
   const { comments } = props;
-  console.log(comments)
+
   /* Will either holf a list of comments or ber null */
   let commentList;
 
   /* handle click for loading more comments */
   const handleClickMoreComments = (parent, children) => {
-    console.log('Clickety Click')
+    
     dispatch(loadMoreComments({
       parent: parent,
       children: children,

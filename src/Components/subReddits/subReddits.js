@@ -20,7 +20,7 @@ const SubReddits = () => {
   const subRedditList = useSelector(selectSubReddits);
   const currentSubReddit = useSelector(selectFeedName);
 
-  console.log(currentSubReddit)
+  
 
   // Handle change of value
   const onChange = (event) => {

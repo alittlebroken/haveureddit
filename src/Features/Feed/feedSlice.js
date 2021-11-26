@@ -57,15 +57,12 @@ export const populateFeed = createAsyncThunk('feed/populateFeed',
       }
     }
 
-    console.log(`URL: ${url}`)
-
     /* Now fetch the data from the specified URL and convert to json and then
     return it */
     const response = await fetch(url, fetchOptions);
     // get the JSON from the response data
     const json = await response.json();
 
-    console.log(json)
     return json.data;
 
   }
