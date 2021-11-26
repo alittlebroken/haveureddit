@@ -7,9 +7,7 @@ import {
   selectComments,
   loadComments,
   selectIsLoading,
-  selectHasError,
-  loadMoreComments,
-  selectMoreComments } from '../../Features/Comments/commentsSlice'
+  selectHasError } from '../../Features/Comments/commentsSlice'
 
 // Stylesheet
 import './post.css';
@@ -25,7 +23,6 @@ const Post = (props) => {
     title,
     author,
     subreddit,
-    num_comments,
     over_18,
     id
   } = data;
@@ -36,10 +33,7 @@ const Post = (props) => {
       name: subreddit,
       id: id,
     }))
-  },[]);
-
-  /* now get a list of more comments */
-  const moreComments = useSelector(selectMoreComments);
+  },[dispatch, id, subreddit]);
 
   /* loop through and load more comments in batches of 100
   for( let i = 0; i <= moreComments.length; 1 + 100){
@@ -139,7 +133,8 @@ const Post = (props) => {
 
         return <img
         src={finalUrl}
-        className="postImgGallery" />
+        className="postImgGallery"
+        alt="Gallery of random images"/>
 
       });
 

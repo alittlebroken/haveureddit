@@ -4,10 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Custom component imports
 import {
-  selectFeedName,
   selectLimit,
   setLimit,
-  restoreOldFeedName,
   setSortType,
   selectSortType,
   selectSearchTerm,
@@ -23,7 +21,6 @@ const FeedNavigation = () => {
   const dispatch = useDispatch();
 
   // Gather data from selectors
-  const subReddit = useSelector(selectFeedName);
   const limit = useSelector(selectLimit);
   const sortType = useSelector(selectSortType);
 

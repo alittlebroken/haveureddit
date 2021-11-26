@@ -1,12 +1,8 @@
 /* Package imports */
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
-  selectComments,
-  loadComments,
-  selectIsLoading,
-  selectHasError,
   loadMoreComments } from '../../Features/Comments/commentsSlice.js';
 
 import Comment from './Comment.js';

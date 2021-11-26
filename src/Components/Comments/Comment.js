@@ -1,8 +1,6 @@
 /* Package imports */
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import CommentsList from './CommentsList.js';
-import { loadReplies } from '../../Features/Comments/commentsSlice.js';
 import { getCommentReplies } from '../../utilities';
 
 /* Style imports */
@@ -16,7 +14,6 @@ const Comment = (props) => {
 
   /* Check if the comment has any replies */
   let commentReplies = [];
-  let hasReplies = false;
   let replies = [];
 
   replies = getCommentReplies(comment);
