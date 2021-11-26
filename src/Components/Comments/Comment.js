@@ -33,7 +33,7 @@ const Comment = (props) => {
           return null;
         } else {
           return (
-            <article className="card commentCard">
+            <article key={child.id} className="card commentCard">
               <span className="commentTitle">{child.author}</span>
               <div className="commentBody">
                 <ReactMarkdown>{child.body}</ReactMarkdown>
@@ -49,8 +49,6 @@ const Comment = (props) => {
   };
 
   commentReplies = showReplies(replies);
-
-  console.log(comment)
 
   /* Details on proper comments
   The info endpoint's response doesn't seem to include the replies, If you want

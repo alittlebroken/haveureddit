@@ -7,7 +7,9 @@ import {
   selectComments,
   loadComments,
   selectIsLoading,
-  selectHasError } from '../../Features/Comments/commentsSlice.js';
+  selectHasError,
+  loadMoreComments,
+  selectMoreComments } from '../../Features/Comments/commentsSlice'
 
 // Stylesheet
 import './post.css';
@@ -35,6 +37,17 @@ const Post = (props) => {
       id: id,
     }))
   },[]);
+
+  /* now get a list of more comments */
+  const moreComments = useSelector(selectMoreComments);
+
+  /* loop through and load more comments in batches of 100
+  for( let i = 0; i <= moreComments.length; 1 + 100){
+    let chunk = [];
+    chunk.push(moreComments.slice(i,i + 100));
+    console.log(chunk)
+  }
+  */
 
   // Get list of comments
   const comments = useSelector(selectComments);
