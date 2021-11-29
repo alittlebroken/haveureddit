@@ -48,8 +48,7 @@ const FeedPagination = () => {
     alt="Previous Page Button"
     title="Previous Page Button"
     onClick={handlePageButton}>
-      <i
-      className="fas fa-angle-double-left"></i>
+      PREV
     </button>;
   } else {
     prevButton = null;
@@ -62,8 +61,7 @@ const FeedPagination = () => {
     title="Next Page Button"
     value="next"
     onClick={handlePageButton}>
-      <i
-      className="fas fa-angle-double-right"></i>
+      NEXT
     </button>;
   } else {
     nextButton = null;

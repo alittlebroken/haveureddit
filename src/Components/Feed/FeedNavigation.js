@@ -76,21 +76,33 @@ const FeedNavigation = () => {
         className="button-link"
         value="hot"
         onClick={handleSetSortType}>
-          <i className="fab fa-hotjar"></i>&nbsp; Hot
+          <img
+          className='icon'
+          alt="hot topics"
+          src={`${process.env.PUBLIC_URL}/resources/icons/hotjar.svg`} />
+          &nbsp;Hot
         </button>
 
         <button
         className="button-link"
         value="top"
         onClick={handleSetSortType}>
-          <i className="far fa-compass"></i>&nbsp;Top
+        <img
+        className='icon'
+        alt="top topics"
+        src={`${process.env.PUBLIC_URL}/resources/icons/compass.svg`} />
+        &nbsp;Top
         </button>
 
         <button
         className="button-link"
         value="new"
         onClick={handleSetSortType}>
-          <i className="fas fa-air-freshener"></i>&nbsp;New
+        <img
+        className='icon'
+        alt="new topics"
+        src={`${process.env.PUBLIC_URL}/resources/icons/air-freshener.svg`} />
+        &nbsp;New
         </button>
 
         <h4>sorted by {sortType}</h4>

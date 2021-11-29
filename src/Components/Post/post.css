@@ -3,7 +3,7 @@
   position: fixed;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2rem auto;
+  grid-template-rows: auto;
   top: 0;
   left: 0;
   width: 100%;
@@ -22,15 +22,7 @@
 }
 
 .postTopBar {
-  display: grid;
-  padding: 0.5rem;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-}
-
-.postTopBar i {
-  color: white;
-  font-size: 1.5rem;
+  margin: 1rem;
 }
 
 .postCloseButton {

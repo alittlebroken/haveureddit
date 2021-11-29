@@ -36,6 +36,26 @@ body {
   border-radius: 5px;
 }
 
+/* icon styles */
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-double img {
+  width: 4rem;
+  height: 4rem;
+}
+
+.icon-double:hover {
+  background-color: var(--main-bg-color);
+}
+
+.icon-container {
+  border: 3px solid white;
+  border-radius: 7px;
+}
+
 /* Site Layout */
 .container {
   display: grid;
