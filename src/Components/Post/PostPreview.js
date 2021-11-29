@@ -38,6 +38,8 @@ const PostPreview = (props) => {
     renderMedia = null;
   } else {
     renderMedia = <img
+    width="150px"
+    height="150px"
     className="post-info-image-thumb"
     src={props.post.thumbnail}
     alt={props.post.title} />;
@@ -112,26 +114,30 @@ const PostPreview = (props) => {
         <span className="button-info-container">
 
           <button className="post-preview-button-info">
-            <i
-            className="far fa-comment"
-            title="comments" alt="comments"
-            ></i>
+          <img
+          className='icon'
+          alt="comments"
+          src={`${process.env.PUBLIC_URL}/resources/icons/comment.svg`} />
             &nbsp;{postComments}
           </button>
 
           <button className="post-preview-button-info">
-            <i
-            className="fas fa-angle-double-up"
-            title="upVote" alt="upVote"></i>
+          <img
+          className='icon'
+          alt="Up Votes"
+          src={`${process.env.PUBLIC_URL}/resources/icons/angle-double-up.svg`} />
             &nbsp;{upVotes}&nbsp;
-            <i
-            className="fas fa-angle-double-down"
-            title="downVote" alt="downVote"></i>
+            <img
+            className='icon'
+            alt="Down Votes"
+            src={`${process.env.PUBLIC_URL}/resources/icons/angle-double-down.svg`} />
           </button>
 
           <button className="post-preview-button-info">
-            <i className="fas fa-trophy"
-            title="Awards" alt="Awards"></i>
+          <img
+          className='icon'
+          alt="Awards given"
+          src={`${process.env.PUBLIC_URL}/resources/icons/trophy.svg`} />
             &nbsp;{awards}
           </button>
 

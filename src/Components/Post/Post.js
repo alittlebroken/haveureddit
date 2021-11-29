@@ -152,10 +152,7 @@ const Post = (props) => {
 
     // Do we have a nsfw post?
     if(over_18){
-      nsfw = <i
-      class="fas fa-exclamation-triangle"
-      alt="Over 18s only (NSFW)"
-      title="Not Safe for Work ( 18+)"></i>;
+      nsfw = null;
     } else {
       nsfw = null;
     }
@@ -175,11 +172,12 @@ const Post = (props) => {
       <div className="postContainer">
 
         <div className="postTopBar">
-            <i
-            className="fas fa-angle-double-left"
-            title="back"
+            <button
+            className="pageButton"
             onClick={props.onClick}
-            alt="back"></i>
+            >
+              BACK
+            </button>
           <p>&nbsp;</p>
         </div>
 
