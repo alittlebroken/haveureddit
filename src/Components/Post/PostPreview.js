@@ -38,6 +38,8 @@ const PostPreview = (props) => {
     renderMedia = null;
   } else {
     renderMedia = <img
+    width="150px"
+    height="auto"
     className="post-info-image-thumb"
     src={props.post.thumbnail}
     alt={props.post.title} />;
